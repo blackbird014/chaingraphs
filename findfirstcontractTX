@@ -1,8 +1,8 @@
 Exercise --- finding the transaction that created the Uniswap V2 contract
 
-it is a basic trace: improvements are. check how to have your ethereum node and put it in a home network ready to be polled.
+it is a basic trace: improvements are necessary. check how to have your ethereum node and put it in a home network ready to be polled.
 node vs yarn.
-ß
+
 
 
 To run the sample code provided for finding the transaction that created the Uniswap V2 contract using Web3.js, you'll need to follow these steps:

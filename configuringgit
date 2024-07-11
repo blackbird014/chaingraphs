@@ -1,0 +1,93 @@
+Configuring Git with your user information and password involves setting your name and email address for Git commits, and optionally configuring credential
+caching for convenience. Here are the steps to configure Git with your user information and password:
+
+1. Set Your Git Username and Email
+These commands set your username and email for Git commits globally (across all repositories on your system).
+If you want to set it for a specific repository, omit the --global flag and run these commands inside the repository.
+
+
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+2. Configure Git to Cache Your Password
+To avoid having to enter your username and password each time you push to a remote repository, you can configure Git to cache your credentials.
+
+For HTTPS URLs
+Option 1: Git Credential Helper (Simple Cache)
+This caches your credentials in memory for a set period of time (default is 15 minutes).
+
+
+git config --global credential.helper cache
+To set a custom cache timeout (e.g., 1 hour):
+
+
+git config --global credential.helper 'cache --timeout=3600'
+Option 2: Git Credential Store
+This stores your credentials in a plain text file in your home directory, which is not recommended for sensitive data due to security risks.
+
+
+git config --global credential.helper store
+This creates a file ~/.git-credentials containing your username and password.
+
+PREFERRED VARIANT
+
+For SSH URLs
+Using SSH keys is more secure and avoids the need to enter a password each time you push or pull.
+
+Generate an SSH key pair (if you don't already have one):
+
+
+ssh-keygen -t ed255196 -C "your.email@example.com"
+the line above is the most secure fast tradeoff, far better than the chatgpt suggested option
+which fallsback to rsa for legacz systems
+
+Follow the prompts to save the key in the default location (~/.ssh/id_rsa) and optionally set a passphrase.
+
+Add your SSH key to the SSH agent:
+
+
+eval "$(ssh-agent -s)"
+line above in bash in fish:
+eval $(ssh-agent -s)
+
+ssh-add ~/.ssh/id_rsa
+Add your SSH key to your GitHub/GitLab/Bitbucket account:
+
+Copy the SSH key to your clipboard:
+
+cat ~/.ssh/id_rsa.pub
+Add the copied key to your account on the platform.
+Configure Git to use the SSH URL for your repository:
+Change the remote URL to use SSH instead of HTTPS:
+
+
+
+
+git remote set-url origin git@github.com:username/repo.git
+Example: Full Setup for GitHub
+Set up user details:
+
+sh
+Copy code
+git config --global user.name "John Doe"
+git config --global user.email "john.doe@example.com"
+Configure credential caching:
+
+sh
+Copy code
+git config --global credential.helper cache
+Generate and add SSH key:
+
+sh
+Copy code
+ssh-keygen -t rsa -b 4096 -C "john.doe@example.com"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
+Add the SSH key to your GitHub account.
+
+Change the remote URL to SSH:
+
+sh
+Copy code
+git remote set-url origin git@github.com:username/repo.git
+By following these steps, you configure Git with your user information and set up convenient and secure ways to manage authentication when interacting with remote repositories.
