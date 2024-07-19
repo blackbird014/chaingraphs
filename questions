@@ -1,0 +1,25 @@
+1. Are there arbitrage possibilities within ethereum?
+2. Cross chain arbitrages using only dexes
+3. is it possible to find historical arbs?
+4. Can oracles, like chainlink just to mention the most famous one in ethereum, be compromised by attacking relatively illiquid pools
+5. Are lending protocols, lps and oracles used in combination not only to arbitrage but also to orchestrate rug pulls.
+6. How gas cost has influenced arbs and pushed to side chains
+7. Is it possible to prepare ad hoc smart contracts that the author(and whoever wants actually)  triggers ovce an arb opportunity arises.
+8. historical cases like the one in 7.
+9. impact of arbs
+
+10. is it possible to trace the usage of smart contracts in arbs and the impact of such arbs.
+11. case of arbs between L1-L2
+
+FROM HERE //// ANALYSIS using AAVE (restricted to ethereum)
+
+12. are flash loans used mainly in arbitrages
+13. Could make sense to monitor flash loans aave contract(s) to analyse its usage in arbitrages, type of arbitrages, effectiveness and impact on DEFI?
+14. Analysis of unpaid flash loans
+15. principle of flash loans: theoretical/practical implemnentation by Aave protocol
+16. analyse historical ethereum data to trace the flash loan calls from EOA or smart contracts. See the main usages not only arbs.Is it possible to quantify the effect on such arbs on
+liquidity, volumes, stability or unstability of the system?
+17. there are usages like avoid liquidations. theyz are known in case of  apps like Defisaver but users can implement contracts or use directly code to do that.
+Are statistics possible? As for arbs in 16. same questions
+18. same approach and questions for the other known usage of flash loans. collateral swaps, liquidation protection, profit rebalancing, leveraged trading.
+19 especially for the last i would like to understand the potential effect on liquidity....example how overleverage can amplify malicious behaviour or bad practises.
