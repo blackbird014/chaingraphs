@@ -1,0 +1,128 @@
+The graph
+It runs on Arbitrum now as indexing service. Is this a problem? No!
+It is just a low gas cost solution. The indexed data are properly selected from ethereum and store through mapper in a db and exposed as previously. Arbitrum is just a convenient solution.
+
+
+https://thegraph.com/explorer/subgraphs/
+CvvUWXNtn8A5zVAtM8ob3JGq8kQS8BLrzL6WJV7FrHRy?view=Query&chain=mainnet
+
+
+Here is the GitHub repo for the AAVE officially curated subgraphs
+https://github.com/aave/protocol-subgraphs
+
+From there I took
+https://thegraph.com/explorer/subgraphs/8wR23o1zkS4gpLqLNU4kG3JHYVucqGyopL5utGxP2q1N?view=Query&chain=arbitrum-one
+
+
+This is exposed by MESSARI instead
+https://thegraph.com/explorer/subgraphs/C2zniPn45RnLDGzVeGZCx2Sw3GXrbc9gL4ZfL8B8Em2j?view=Query&chain=arbitrum-one
+
+
+MESSARI
+
+query test {
+  flashloans(orderBy: timestamp, orderDirection: desc, block: {}, first: 1000) {
+    id
+    timestamp
+    amountUSD
+    gasUsed
+    gasPrice
+    feeAmountUSD
+  }
+}
+
+
+AAVE
+{
+  flashLoans(
+    first: 1000
+    orderBy: timestamp
+    orderDirection: desc
+    
+  ) {
+    id
+    amount
+    totalFee
+    initiator {
+      id
+    }
+    target
+    totalFee
+    
+  }
+}
+
+
+Important: find transaction id so analysis in ethereum can be done.
+
+
+A bulk export can be done as follow.
+
+flashLoans(first: 1000, skip: 0, orderBy: timestamp, orderDirection: desc)flashLoans(first: 1000, skip: 0, orderBy: timestamp, orderDirection: desc)
+
+And looping adding 1000 to skip each time
+
+Example in python: to be refined
+
+
+
+import requests
+import time
+
+# Endpoint for Aave V2 subgraph
+endpoint = "https://api.thegraph.com/subgraphs/name/aave/protocol-v2"
+
+# Function to fetch and count flash loans
+def count_flash_loans():
+    count = 0
+    skip = 0
+    batch_size = 1000
+
+    while True:
+        query = """
+        {
+          flashLoans(first: 1000, skip: %d) {
+            id
+          }
+        }
+        """ % skip
+
+        try:
+            response = requests.post(endpoint, json={'query': query})
+            data = response.json()
+
+            if 'errors' in data:
+                print("Error querying the graph:", data['errors'])
+                break
+
+            flash_loans = data.get('data', {}).get('flashLoans', [])
+
+            if not flash_loans:
+                # If no flash loans are returned, break the loop
+                break
+
+            # Increment count by the number of flash loans returned
+            count += len(flash_loans)
+
+            # Check if the batch is smaller than the batch size
+            if len(flash_loans) < batch_size:
+                # If true, then it is the last batch
+                break
+
+            # Move to the next page
+            skip += batch_size
+
+            # Optional: add a delay to avoid rate limiting
+            time.sleep(0.2)  # 200 ms delay
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            break
+
+    return count
+
+# Count all flash loans
+total_flash_loans = count_flash_loans()
+
+# Output the result
+print(f"Total flash loans issued: {total_flash_loans}")
