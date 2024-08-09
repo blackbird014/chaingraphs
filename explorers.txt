@@ -1,0 +1,58 @@
+POINT: analyse that code in order to take eventually reuse in transaction processing
+blockscout plus geth.... so the json from geth are the ones we can ingest there.
+
+
+here are several open-source and free applications that can be installed locally on a self-run Ethereum node, like the one provided by Geth. These applications offer functionality similar to Etherscan, including the ability to explore blockchain data, track transactions, and interact with smart contracts. Here are some popular options:
+
+1. BlockScout
+BlockScout is a versatile and open-source blockchain explorer. It supports Ethereum and other Ethereum-compatible networks. You can install BlockScout on your local Ethereum node to provide Etherscan-like functionality.
+
+Features: Transaction history, contract interactions, block exploration, token tracking.
+Installation: BlockScout is relatively easy to set up and can be integrated with Geth. Installation guides are available in the BlockScout GitHub repository.
+Installation Steps:
+
+Clone the BlockScout repository from GitHub.
+Follow the installation instructions provided in the documentation to configure BlockScout with your local Geth node.
+2. Etherchain Explorer
+Etherchain Explorer is another open-source project that offers blockchain exploration functionality. It's designed to work with Ethereum nodes and provides a web interface to explore blockchain data.
+
+Features: Block explorer, transaction history, address balance.
+Installation: The source code is available on GitHub. You'll need to follow the instructions to set it up and connect it to your Geth node.
+Installation Steps:
+
+Clone the Etherchain Explorer repository.
+Follow the setup instructions to connect it to your local Ethereum node.
+3. Ethereum-ETL
+Ethereum-ETL is a tool for extracting, transforming, and loading Ethereum blockchain data. While it is more focused on data extraction and transformation, it can be used in conjunction with other tools to build a custom blockchain explorer.
+
+Features: Data extraction, transformation, and loading; integration with data analysis tools.
+Installation: Available via Ethereum-ETL GitHub repository.
+Installation Steps:
+
+Clone the Ethereum-ETL repository.
+Follow the documentation to set up the extraction and integration with other components if needed.
+4. Ganache UI
+Ganache is a personal blockchain for Ethereum development. While it’s primarily used for testing and development, it includes a graphical interface for exploring blockchain data.
+
+Features: Transaction history, contract events, block exploration.
+Installation: Download and install Ganache from the Truffle Suite website.
+Installation Steps:
+
+Download Ganache from the official website.
+Follow the instructions to run it and connect it to your local node if needed.
+5. DappNode
+DappNode provides a decentralized infrastructure for hosting Ethereum nodes and other blockchain applications. It simplifies the installation of various blockchain-related services, including explorers.
+
+Features: Pre-configured nodes and services, including explorers and analytics tools.
+Installation: DappNode website offers installation guides and pre-built packages.
+Installation Steps:
+
+Install DappNode following the instructions on their website.
+Configure it to use your local Ethereum node and enable the explorer services.
+Summary
+BlockScout is a robust option for a full-featured blockchain explorer.
+Etherchain Explorer provides basic explorer functionality.
+Ethereum-ETL is great for data extraction and can be combined with other tools.
+Ganache is useful for development and testing, with explorer features.
+DappNode offers an integrated environment with various blockchain services.
+These tools allow you to have a local blockchain explorer similar to Etherscan, enabling you to interact with your Ethereum node and explore blockchain data effectively.
