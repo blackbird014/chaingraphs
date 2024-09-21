@@ -1,0 +1,147 @@
+options YOU FIND ALL HERE
+https://erigon.gitbook.io/erigon/advanced-usage/options
+
+
+
+--private.api.addr=x.x.x.x:9090   erigon listen on 9090 (127.0.0.1) for gRPC call. USED to start independentlz services like RPCDAEMON (also txpool, rpcdaemon, sentry, downloader)
+
+
+--http.api=eth,erigon,web3,net,debug,trace,txpool,parity,admin   offered over http-rpc (default eth,erigon,engine)
+
+
+--http.addr value     normally i don't set it! HTTP-RPC server listening interface (default: "localhost")
+--http.port value     HTTP-RPC server listening port (default: 8545).
+
+So normally I call this as localhost:8545 with a normal RPC call via curl or postman.
+
+
+USEFUL
+The Engine API in Erigon, and more broadly in Ethereum clients, refers to a set of JSON-RPC methods designed
+to support the interaction between the consensus layer (formerly known as Eth2) and the execution layer
+(formerly known as Eth1). This API is crucial for the operation of Ethereum after the network's transition
+from Proof of Work (PoW) to Proof of Stake (PoS) following "The Merge."
+
+   --authrpc.addr value                                                             HTTP-RPC server listening interface for the Engine API (default: "localhost")
+   --authrpc.port value                                                             HTTP-RPC server listening port for the Engine API (default: 8551)
+   --authrpc.jwtsecret value                                                        Path to the token that ensures safe connection between CL and EL
+
+For web sockets
+enough to pass --ws without params
+reason
+ --ws.port value         WS-RPC server listening port (default: 8546)
+ --ws                    Enable the WS-RPC server (default: false)
+ --ws.compression        Enable compression over WebSocket (default: false)
+
+
+
+TESTED sepolia
+http enabled by def and keep ports
+embedded services started as well as caplin
+
+./build/bin/erigon  --internalcl --datadir="_sepoliadata" --chain=sepolia  --ws --http.api=eth,debug,net,trace,web3,erigon --prune=hrtc (prune takes only last 90k blocks)
+
+PROD
+./build/bin/erigon  --internalcl --datadir="ethereum"  --ws --http.api=eth,debug,net,trace,web3,erigon  add also (,ots --http.corsdomain "*" --http.vhosts="*" --http.addr=0.0.0.0) to use otterscan
+
+testing now
+./build/bin/rpcdaemon --datadir="_sepoliadata" --http.api=eth,erigon,net,web3,ots --http.corsdomain="*" (I see no reason for the following:  --http.addr=0.0.0.0 --http.port=8545)
+
+docker run --rm -p 5100:80 --name otterscan -d otterscan/otterscan:v2.6.0
+
+now otterscan can be accessed at http://127.0.0.1:5100/ --- important to start rpcdaemon as showed above.
+
+docker...
+note that I start manually the docker daemon with systctl
+
+
+
+1. sudo systemctl start docker
+then I run the container starting from a downloaded image
+2. docker run --rm -p 5100:80 --name otterscan -d otterscan/otterscan:v2.6.0
+flage used
+The -d flag runs the container in detached mode (in the background).
+The -p 5100:80 option maps port 5100 on your local machine to port 80 inside the container.
+The --rm flag automatically removes the container when it exits.
+The --name otterscan assigns a name to the running container.
+
+3. docker ps
+verifies running processes
+
+
+
+This is the JSON response for eth.syncing, which provides detailed information about the synchronization process of an Ethereum node. Below is a breakdown and commentary on each field:
+
+Main Fields:
+currentBlock: 0: The block number that the node has currently processed. Since this is 0, it indicates that the node has not yet processed any blocks.
+
+highestBlock: 20399999: The block number that the node is trying to reach. This represents the latest block in the blockchain at the time of syncing.
+
+startingBlock: 0: The block number from which the synchronization started. Here, it's 0, which likely means the node started syncing from the genesis block.
+
+Healing Fields (Related to state healing):
+healedBytecodeBytes: 0 and healedBytecodes: 0: These show the number of bytecodes (and their size in bytes) that have been healed (repaired or corrected) during the sync process. In this case, no bytecodes have been healed.
+
+healedTrienodeBytes: 0 and healedTrienodes: 0: These indicate the number of trienodes (data structures used in the Ethereum state tree) and their size in bytes that have been healed. No trienodes have been healed yet.
+
+healingBytecode: 0 and healingTrienodes: 0: The number of bytecodes and trienodes currently being healed (actively in progress). In this case, there is no healing happening.
+
+Sync Stages (Specific sync stages the node is going through):
+The stages array provides detailed progress on various synchronization tasks:
+
+stage_name: "Snapshots": Refers to syncing of snapshots, which is a faster way of syncing the state.
+
+block_number: "0x137477f": The block number at which the snapshot sync is currently happening (hexadecimal for block 20399999).
+stage_name: "Headers": The synchronization of block headers. It's at block 0x137477f, which is the current block number (block 20399999).
+
+stage_name: "BorHeimdall": This is specific to sidechains like Polygon (Matic), suggesting the node is involved in syncing with the Polygon network, particularly the Bor layer. No progress here (block_number: "0x0").
+
+Other stages (e.g., "BlockHashes", "Bodies", "Senders"): These stages represent the processing of different components of blocks:
+
+"BlockHashes": Verifying block hashes.
+"Bodies": Syncing block bodies (transactions, logs).
+"Senders": Syncing sender information for transactions.
+stage_name: "Execution": The node is executing block transactions at block 0x66ff1f (hexadecimal for block 6733087). The node is lagging behind in execution compared to other stages.
+
+Stages with block_number: "0x0": These stages haven't started yet. This includes:
+
+Translation: Related to converting between different formats.
+HashState: Syncing the state tree's hash.
+AccountHistoryIndex, StorageHistoryIndex, LogIndex: Indexing historical account and storage data, logs.
+CallTraces, TxLookup: Tracing calls and transactions.
+stage_name: "Finish": The final stage of synchronization, which hasn't started (block_number: "0x0").
+
+Additional Sync Stats:
+syncedAccountBytes: 0, syncedAccounts: 0: No account data has been synced yet.
+
+syncedBytecodeBytes: 0, syncedBytecodes: 0: No bytecode data has been synced yet.
+
+syncedStorage: 0, syncedStorageBytes: 0: No storage data has been synced.
+
+txIndexFinishedBlocks: 0, txIndexRemainingBlocks: 0: No blocks have been indexed for transactions, and all blocks still need to be indexed.
+
+
+
+
+net.peerCount: Number of connected peers.
+eth.blockNumber: Current block number.
+eth.getBlock('latest'): Retrieve the latest block.
+eth.getTransaction('0xtransactionhash'): Get transaction details by hash.
+eth.syncing: Check sync status.
+eth.getBalance('0xaccountaddress'): Get balance of an address.
+eth.gasPrice: Get current gas price.
+eth.mining: Check if node is mining.
+
+
+--prune=htc (Historical Transaction Cleanup):
+HTC mode does not prune historical data completely like hrc. Instead, it prunes old transaction execution traces and removes receipts and logs, while keeping all historical state data intact.
+It is typically used for archive nodes that want to keep all block and state data but reduce some disk space by discarding transaction traces, which aren’t needed for most users but are useful for debugging tools.
+Summary of --prune=htc:
+Keeps full historical states (all blocks and state data are preserved).
+Removes transaction execution traces, receipts, and logs to save space.
+This means that while the block states will be preserved, the transaction traces and logs for blocks older than 90,000 will not be retained in HTC mode. So, it's technically not wrong but could be easily misunderstood as it only prunes specific parts of the data (transaction execution traces and logs) rather than the entire historical state like hrc.
+
+--prune=hrc (Historical Record Cleanup):
+HRC prunes more aggressively and removes all historical blocks and states older than 90,000 blocks. This is intended for users who only need the most recent data.
+Conclusion:
+htc keeps full block and state history but removes transaction execution traces/logs (useful for archive nodes).
+hrc prunes older blocks and states entirely (used for full nodes that only need recent data).
