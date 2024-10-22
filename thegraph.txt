@@ -126,3 +126,193 @@ total_flash_loans = count_flash_loans()
 
 # Output the result
 print(f"Total flash loans issued: {total_flash_loans}")
+
+
+
+Analyse tx in otterscan or etherscan
+
+When analyzing complex transactions like flash loans on Etherscan or Otterscan, you're likely encountering several challenges related to the chronological order and detailed information about the loan and its repayment. These challenges stem from how Ethereum transactions and internal calls are structured. Here’s why this happens and how you can dig deeper:
+
+### 1. **Why the Order and Structure Can Appear Confusing:**
+
+#### a. **Internal Transactions and Calls:**
+   Complex transactions, such as flash loans, often involve multiple **internal transactions** and **contract calls** that happen within a single Ethereum transaction. These internal transactions are not directly recorded on the blockchain like regular external transactions but are instead part of the execution trace of a smart contract.
+
+   - **Flash loans** typically involve borrowing, using the borrowed funds for certain operations (e.g., arbitrage or liquidation), and then repaying the loan—all within one transaction.
+   - Etherscan and Otterscan try to display these internal transactions, but the order may appear out of sync due to how the logs and traces are processed.
+
+#### b. **Logs vs. Traces:**
+   Ethereum transactions generate **logs** (also known as **events**) and **execution traces**. Logs are emitted by smart contracts to signal important events (such as a loan being issued or repaid), while traces show the step-by-step execution of the transaction, including internal calls between contracts.
+
+   - Logs may not always provide enough detail to fully understand the sequence of events, especially in complex transactions.
+   - Traces provide more granular detail, but they can be harder to parse, as they include every step of contract execution, which can be nested and convoluted.
+
+#### c. **Atomic Nature of Flash Loans:**
+   Flash loans are atomic by nature—they either fully succeed (with loan repayment) or revert (fail entirely). This atomicity can make it difficult to see the chronological steps in a high-level interface like Etherscan or Otterscan because everything happens within a single block.
+
+### 2. **How to Dig Deeper:**
+
+To get a clearer picture of what's happening in a flash loan transaction, you can use a combination of approaches to dig into the details:
+
+#### a. **Use the Debug Traces (Otterscan/Erigon):**
+   Otterscan (and other explorers based on Erigon) offer more detailed **debug traces** that can help you follow the exact sequence of operations, including internal calls, token transfers, and gas usage.
+
+   - **Trace APIs**: Otterscan, through Erigon, allows you to inspect **execution traces** of transactions. This will show the exact order of function calls, including the borrowing and repayment steps in flash loans.
+   - To enable traces in Erigon, make sure the **`--tracing`** flag is set, which allows you to retrieve detailed step-by-step transaction traces.
+
+   With traces, you can:
+   - Identify the **exact function calls** in order.
+   - See all the **internal state changes**, token transfers, and balances before and after the transaction.
+   - Determine when the loan was issued and when it was repaid.
+
+#### b. **Look at Event Logs:**
+   In addition to traces, you can use **event logs** to find specific moments in the transaction, such as when a loan is issued or repaid. These events are emitted by the smart contracts and can be used to infer the key steps in the flash loan.
+
+   - Event logs can be found under the "Logs" tab in Etherscan or via Otterscan.
+   - For flash loans, the smart contract should emit specific events (e.g., `FlashLoan`, `LoanRepaid`) that indicate when the loan was issued and repaid.
+
+#### c. **Analyze the Contract Code and Events:**
+   If the contract's source code is verified on Etherscan, you can analyze the code to understand the **flow of the transaction**. Look for functions related to flash loans (such as `flashLoan()`) and the conditions for repayment.
+
+   - You can also check the **ABI (Application Binary Interface)** to identify all the events and methods the contract uses.
+   - By analyzing the contract’s source code and events, you can manually track the flow of operations and verify if a loan has been repaid.
+
+#### d. **Use Tools like Tenderly or Parity Tracing:**
+   Tools like **Tenderly** offer more advanced tracing and simulation features, allowing you to inspect every detail of a transaction, including gas consumption, internal calls, and contract interactions.
+
+   - With Tenderly, you can **simulate** transactions, step through them line by line, and see the state changes in real time.
+   - Tenderly also provides detailed **call graphs**, making it easier to follow complex transaction flows, such as flash loans.
+
+#### e. **ERC-3156 Flash Loan Standard (if applicable):**
+   If the flash loan follows the **ERC-3156** standard, you can look for specific events and function signatures related to the loan issuance and repayment. This standard defines how flash loans should be structured and makes it easier to track key points in the loan lifecycle.
+
+### 3. **Next Steps:**
+   - **Trace the transaction** using Otterscan or Erigon to see internal calls.
+   - **Check the event logs** to identify when the flash loan was issued and repaid.
+   - **Inspect the smart contract code** for flash loan-specific functions and events.
+   - Use **Tenderly** or other advanced tracing tools for deeper insights into complex transactions.
+
+By combining execution traces, event logs, and code analysis, you can gain a more complete understanding of flash loans and other complex transactions, ensuring you see the proper chronological order and determine whether the loan was repaid or not.
+
+
+
+study in the graph
+{
+  flashloans(first: 5, orderBy: amount, orderDirection: desc) {
+    id
+    amount
+    timestamp
+    amountUSD
+    blockNumber
+    hash
+  }
+}
+
+reply
+
+{
+  "data": {
+    "flashloans": [
+      {
+        "amount": "350000000000000000000000000",
+        "amountUSD": "349597751.4474315409598895928248957",
+        "blockNumber": "14602790",
+        "hash": "0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad7",
+        "id": "0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad76900000006000000",
+        "timestamp": "1650198256"
+      },
+      {
+        "amount": "78465988600582788297000000",
+        "amountUSD": "78488458.63395031958301255403372147",
+        "blockNumber": "12765761",
+        "hash": "0x7567551456d5bafc6816e40b3dfa27de4040d140430c7d815e641d301755fb0b",
+        "id": "0x7567551456d5bafc6816e40b3dfa27de4040d140430c7d815e641d301755fb0b3001000006000000",
+        "timestamp": "1625464917"
+      },
+      {
+        "amount": "77926704000000000000000000",
+        "amountUSD": "78097069.42128388169628392697528458",
+        "blockNumber": "12428389",
+        "hash": "0xa55285d2d43562befbc4d2e76e722f4e34973a42cfe9f40b5222bf0f68bb8841",
+        "id": "0xa55285d2d43562befbc4d2e76e722f4e34973a42cfe9f40b5222bf0f68bb8841a500000006000000",
+        "timestamp": "1620939686"
+      },
+      {
+        "amount": "50000000000000000000000000",
+        "amountUSD": "30444198.7266429157239672265873159",
+        "blockNumber": "17845588",
+        "hash": "0x006763dff653ecddfd3681181a29e7e6d6c2aaa7bafb27fe1376f3f7ce367c1e",
+        "id": "0x006763dff653ecddfd3681181a29e7e6d6c2aaa7bafb27fe1376f3f7ce367c1ea102000006000000",
+        "timestamp": "1691200055"
+      },
+      {
+        "amount": "38100000000000000000000000",
+        "amountUSD": "38342882.139495868976566678826281",
+        "blockNumber": "15937667",
+        "hash": "0x04c43669c930a82f9f6fb31757c722e2c9cb4305eaa16baafce378aa1c09e98e",
+        "id": "0x04c43669c930a82f9f6fb31757c722e2c9cb4305eaa16baafce378aa1c09e98e1000000006000000",
+        "timestamp": "1668059735"
+      }
+    ]
+  }
+}
+
+
+looking for repayment
+
+{
+  flashloans(where: {blockNumber: 14602790}) {
+    id
+    amount
+    blockNumber
+    timestamp
+  }
+  repays {
+    amountUSD
+  }
+}
+
+
+Erigon programmatically in case thegraph misses some indexing
+
+npm install web3
+
+
+then adapt this
+
+const Web3 = require('web3');
+const web3 = new Web3('http://localhost:8545');
+
+// Replace with your desired block number
+const blockNumber = 14602790;
+
+async function getAaveRepayments(blockNumber) {
+    // Get block data
+    const block = await web3.eth.getBlock(blockNumber, true); // true for full transaction objects
+
+    // Aave Lending Pool contract address (replace with the correct address)
+    const aaveLendingPoolAddress = '0x...'; // Insert Aave Lending Pool address
+
+    // Aave repayment method signature (replace with the correct method signature)
+    const repayMethodSignature = web3.utils.sha3('repay(address,uint256,uint256,address)'); // Check the actual method signature for the specific version of Aave
+
+    const repayments = [];
+
+    // Loop through transactions and filter
+    block.transactions.forEach(tx => {
+        if (tx.to.toLowerCase() === aaveLendingPoolAddress.toLowerCase()) {
+            const inputData = tx.input;
+            if (inputData.startsWith(repayMethodSignature.slice(0, 10))) {
+                repayments.push({
+                    hash: tx.hash,
+                    value: web3.utils.fromWei(tx.value, 'ether'), // Convert value to ether if needed
+                    inputData: inputData,
+                });
+            }
+        }
+    });
+
+    console.log('Aave Flash Loan Repayments:', repayments);
+}
+
+getAaveRepayments(blockNumber);

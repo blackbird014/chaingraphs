@@ -46,6 +46,7 @@ PROD
 testing now
 ./build/bin/rpcdaemon --datadir="_sepoliadata" --http.api=eth,erigon,net,web3,ots --http.corsdomain="*" (I see no reason for the following:  --http.addr=0.0.0.0 --http.port=8545)
 
+
 docker run --rm -p 5100:80 --name otterscan -d otterscan/otterscan:v2.6.0
 
 now otterscan can be accessed at http://127.0.0.1:5100/ --- important to start rpcdaemon as showed above.
@@ -145,3 +146,99 @@ HRC prunes more aggressively and removes all historical blocks and states older 
 Conclusion:
 htc keeps full block and state history but removes transaction execution traces/logs (useful for archive nodes).
 hrc prunes older blocks and states entirely (used for full nodes that only need recent data).
+
+
+The long synch process fir a full node including indexing for Erigon.
+
+Here’s a detailed breakdown of each step in the Erigon sync process, focusing on disk space requirements. This will cover both the steps already completed and the remaining ones, helping you understand the space usage at every stage.
+
+1. BlockDownload (1/12)
+Description: In this step, the node downloads block headers, block bodies, and transaction data from other peers.
+Disk Space: This step is one of the most disk-intensive. Full blocks contain transaction data, state roots, receipts, and logs.
+Estimate: For a full node (not archival), this can take around 1-2 TB of disk space. The exact amount depends on whether you’re keeping full historical data or using a pruned mode. For an archival node, this could easily require several terabytes more.
+2. BlockExecution (2/12)
+Description: Executes transactions within blocks to recreate the state of the blockchain (account balances, smart contract states, etc.).
+Disk Space: This step generates new state data but doesn’t significantly increase disk usage compared to BlockDownload. The state changes are tracked but don’t drastically grow storage needs.
+Estimate: Minimal increase in space, since it primarily reuses the downloaded block data and updates the state.
+3. Senders (3/12)
+Description: Identifies the sender of each transaction and indexes this information for later lookups.
+Disk Space: The data required for sender indexing is relatively small because the index primarily consists of mappings from transaction hashes to senders.
+Estimate: Small—around a few gigabytes, depending on how many transactions have been processed on the blockchain.
+4. Execution (4/12)
+Description: Similar to BlockExecution, this step processes and executes blocks but includes more advanced state updates like gas usage, storage interactions, and more. It ensures that the node’s state is consistent with the chain.
+Disk Space: Although computationally intensive, this step doesn’t drastically increase storage. It’s mainly concerned with executing transactions that have already been downloaded and updating the in-memory state.
+Estimate: Minimal additional space, since it works mostly with the existing block data.
+5. HashState (5/12)
+Description: This step involves processing changes to account states, including balance updates and smart contract changes.
+Disk Space: This can be moderately disk-intensive because it involves the account state changes. However, the size of account data is small relative to the entire blockchain.
+Estimate: Moderate space usage, typically in the range of a few gigabytes to tens of gigabytes, depending on how many accounts are updated.
+Steps Remaining:
+6. TrieAccount (6/12)
+Description: Builds the Merkle Patricia Trie for account state data, allowing efficient verification of account balances and states.
+Disk Space: Compact and efficient in storage but can still grow due to the number of accounts on Ethereum.
+Estimate: Minimal space increase, usually a few gigabytes.
+7. TrieStorage (7/12)
+Description: Builds the Merkle Patricia Trie for contract storage. This is more involved when smart contracts have large storage needs.
+Disk Space: More storage-intensive than TrieAccount due to contract data, but still not as large as raw transaction data.
+Estimate: Moderate space usage, depending on the amount of smart contract data (a few to several gigabytes).
+8. ByteCodes (8/12)
+Description: Processes and stores the bytecodes of smart contracts.
+Disk Space: Smart contract bytecodes are generally small, even though there are many of them.
+Estimate: Small space usage, typically a few gigabytes.
+9. CallTraces (9/12)
+Description: Processes call traces of transactions, which includes internal contract calls and transactions between contracts.
+Disk Space: Call traces can get moderately large, especially for contracts with complex interactions, but it's still less than block data.
+Estimate: Moderate space usage, potentially in the range of tens of gigabytes.
+10. Logs (10/12)
+Description: Processes and indexes event logs emitted by smart contracts. These logs are key for monitoring smart contract events.
+Disk Space: Event logs can add up if many contracts are emitting frequent events, but they are generally lightweight.
+Estimate: Small to moderate—likely a few gigabytes depending on the activity of smart contracts.
+11. Receipts (11/12)
+Description: Processes transaction receipts, which contain information about transaction outcomes (e.g., success/failure, gas usage, etc.).
+Disk Space: Receipts are small data structures, and while there are many of them, the space needed is minimal.
+Estimate: Small—a few gigabytes at most.
+12. TxLookup (12/12)
+Description: Creates an index to allow fast transaction lookups by hash or block number.
+Disk Space: Indexes are typically efficient in terms of space usage but still require additional storage.
+Estimate: Small—a few gigabytes, depending on the number of transactions.
+Summary of Disk Space Usage by Step:
+Step	Disk Space Usage	Estimate
+1/12 BlockDownload	High	~1-2 TB (Full node), more for archival nodes
+2/12 BlockExecution	Low	Minimal increase in disk space
+3/12 Senders	Low	A few gigabytes
+4/12 Execution	Low	Minimal increase
+5/12 HashState	Moderate	A few to several gigabytes
+6/12 TrieAccount	Low	A few gigabytes
+7/12 TrieStorage	Moderate	A few to several gigabytes
+8/12 ByteCodes	Low	A few gigabytes
+9/12 CallTraces	Moderate	Tens of gigabytes (depending on activity)
+10/12 Logs	Low to Moderate	A few gigabytes
+11/12 Receipts	Low	A few gigabytes
+12/12 TxLookup	Low	A few gigabytes
+Overall Estimate for a Full Node:
+Total Disk Space for a full node: Around 2-3 TB for all steps combined, depending on whether pruning is enabled and the specific state of the Ethereum blockchain.
+For an archival node, the space requirements would be significantly larger (typically 5+ TB).
+Most of the heavy disk space usage happens during the BlockDownload (1/12) phase. The remaining steps (2/12 to 12/12) are more about processing, indexing, and compact storage, and while they take time, they don’t consume nearly as much additional disk space as the first step.
+
+
+
+ in Erigon, there are ways to control the synchronization process so that it stops syncing at a specific block, effectively preventing the node from updating beyond that point. This is useful if you want to maintain a snapshot of the Ethereum blockchain at a particular block height without continuously updating to the latest state.
+
+Here’s how you can achieve this:
+
+Use the --sync.pos Option
+Erigon provides the --sync.pos flag, which allows you to sync up to a specific block number. By specifying the block number where you want the sync to stop, Erigon will sync until that block and then halt further syncing.
+
+Command:
+bash
+Copy code
+erigon --sync.pos <block-number>
+For example, if you wanted to stop syncing at block 12,000,000, you would run:
+
+bash
+Copy code
+erigon --sync.pos 12000000
+This will stop the synchronization process at that block and prevent further updates to the blockchain data. However, be aware that the node will no longer participate in the peer-to-peer network after reaching the specified block, so it won't download new data.
+
+
+SO add --sync.pos <block nr> 

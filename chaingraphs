@@ -1,0 +1,20 @@
+  /home/bb/project/chaingraphs:
+  drwxr-xr-x 4 bb bb  4096 Jul  9 12:17 .
+  drwxr-xr-x 3 bb bb  4096 Jul  4 20:42 ..
+  drwxr-xr-x 2 bb bb  4096 Jul  9 11:52 auto
+* -rw-r--r-- 1 bb bb  4480 Jul  9 11:44 #findfirstcontractTX#
+  -rw-r--r-- 1 bb bb  4533 Jul  4 20:42 findfirstcontractTX
+  drwxr-xr-x 8 bb bb  4096 Jul  6 21:19 .git
+  -rw-r--r-- 1 bb bb 35149 Jul  4 20:42 LICENSE
+  -rw-r--r-- 1 bb bb   141 Jul  4 20:42 README.md
+  -rw-r--r-- 1 bb bb    26 Jul  6 09:54 test
+  -rw-r--r-- 1 bb bb    32 Jul  9 11:52 test.aux
+  -rw-r--r-- 1 bb bb  2759 Jul  9 11:52 test.log
+  -rw-r--r-- 1 bb bb 14960 Jul  9 11:52 test.pdf
+  -rw-r--r-- 1 bb bb    80 Jul  9 12:17 #test.tex#
+  lrwxrwxrwx 1 bb bb    28 Jul  9 12:12 .#test.tex -> bb@manjaro.285186:1719408432
+  -rw-r--r-- 1 bb bb    82 Jul  9 11:52 test.tex
+  -rw-r--r-- 1 bb bb     1 Jul  9 11:44 test.tex~
+  -rw-r--r-- 1 bb bb 47734 Jul  9 09:53 #TUTORIAL#
+  -rw-r--r-- 1 bb bb 47749 Jul  6 21:17 TUTORIAL
+  -rw-r--r-- 1 bb bb 47722 Jul  6 19:02 TUTORIAL~

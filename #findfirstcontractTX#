@@ -1,0 +1,140 @@
+Exercise --- finding the transaction that created the Uniswap V2 contract
+
+it is a basic trace: improvements are necessary. check how to have your ethereum node and put it in a home network ready to be polled.
+node vs yarn.
+
+
+
+To run the sample code provided for finding the transaction that created the Uniswap V2 contract using Web3.js, you'll need to follow these steps:
+
+Step-by-Step Guide on manjaro
+It can be automatised. Look for the build similar to maven in java or make in C.
+Note that we choose node over yarn but an analyse will follow to decide what is better.
+1. Install Node.js and npm
+First, ensure that you have Node.js and npm installed on your Manjaro machine. You can install them using the following commands:
+
+NOTE => check fish
+bash
+# Update package database
+sudo pacman -Syu
+
+# Install Node.js and npm
+sudo pacman -S nodejs npm
+
+# Verify installation
+node -v
+npm -v
+
+2. Set Up Project Directory
+Create a new directory for your project and navigate into it:
+
+
+mkdir uniswap-transaction-finder
+cd uniswap-transaction-finder
+Initialize a new Node.js project:
+
+
+npm init -y
+3. Install Web3.js
+Install the Web3.js library:
+
+bash
+npm install web3
+4. Create the Monitoring Script
+Create a new file named index.js in your project directory and paste the following code:
+
+javascript -SUBOPTiMAL
+const Web3 = require('web3');
+
+// Replace with your Infura Project ID or use another provider
+const INFURA_PROJECT_ID = 'YOUR_INFURA_PROJECT_ID';
+const web3 = new Web3(`https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`);
+
+// Uniswap V2 factory contract address
+const factoryAddress = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
+
+// Get the transaction that created the contract
+const getCreationTransaction = async (address) => {
+  const code = await web3.eth.getCode(address);
+  if (code === '0x') {
+    console.log('Contract does not exist.');
+    return;
+  }
+
+  const latest = await web3.eth.getBlockNumber();
+
+  for (let i = 0; i <= latest; i++) {
+    const block = await web3.eth.getBlock(i, true);
+    for (const tx of block.transactions) {
+      if (tx.creates === address) {
+        console.log('Transaction found:', tx);
+        return tx;
+      }
+    }
+  }
+  console.log('Transaction not found.');
+};
+
+getCreationTransaction(factoryAddress);
+Replace 'YOUR_INFURA_PROJECT_ID' with your actual Infura Project ID. If you don't have an Infura Project ID, you can get one by signing up at Infura.
+
+5. Run the Script
+To run your script, navigate to your project directory and use the following command:
+
+
+node index.js
+This will execute the script and start searching for the transaction that created the Uniswap V2 factory contract.
+
+Additional Notes
+Performance Consideration:
+The provided code is a basic implementation and can be slow since it iterates through each block. For better performance, consider optimizing the search by starting from the known block number range when Uniswap V2 was deployed (around block 10000835).
+
+Using Web3.js Efficiently:
+Depending on your use case, you might want to use more efficient ways to search through blocks and transactions, such as binary search or filtering by block timestamp.
+
+Optimized Sample Code
+Here is a slightly optimized version of the script that starts from a known block range:
+
+javascript
+Copy code
+const Web3 = require('web3');
+
+// Replace with your Infura Project ID or use another provider
+const INFURA_PROJECT_ID = 'YOUR_INFURA_PROJECT_ID';
+const web3 = new Web3(`https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`);
+
+// Uniswap V2 factory contract address
+const factoryAddress = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
+
+// Known block range where Uniswap V2 was deployed
+const startBlock = 10000835; // Approximate block number
+const endBlock = 10000850; // A few blocks after the approximate deployment block
+
+// Get the transaction that created the contract
+const getCreationTransaction = async (address) => {
+  const code = await web3.eth.getCode(address);
+  if (code === '0x') {
+    console.log('Contract does not exist.');
+    return;
+  }
+
+  for (let i = startBlock; i <= endBlock; i++) {
+    const block = await web3.eth.getBlock(i, true);
+    for (const tx of block.transactions) {
+      if (tx.creates === address) {
+        console.log('Transaction found:', tx);
+        return tx;
+      }
+    }
+  }
+  console.log('Transaction not found in the specified block range.');
+};
+
+getCreationTransaction(factoryAddress);
+By starting from a more targeted block range, you can significantly reduce the time it takes to find the transaction.
+
+
+
+
+
+

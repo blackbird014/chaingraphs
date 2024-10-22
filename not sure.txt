@@ -1,0 +1,74 @@
+The size of download and time invested suggest to perform a periodical backup.
+Many possible application. Example: we are going through a switch to raid-0 to gain IO speed
+with the theoretical possibility of doubling it and the realistic one of a plus 70%
+Having already downloaded some tb of data makes sense to rsynch them on an external disk, create the raid/0 and copy the backup on it.
+Until a switch in the main erigon version is not planned the backup will play the role quite well.
+We have decided to postpone erigon 3 as it looks still too unstable. It is fast and very well thought as architecture and comes with many advantages as speed of synch, architecural decoupling of components to mention few. Just it looks premature and the databaase is not compatible cross versions.
+
+rsync -avL --progress /path/to/symlink/ /mnt/external/
+assign permission to the proper user in the newly formatted disk
+
+
+Note to partition properly a disk greater than 2 Tb we used parted
+assuming the new disk is named sdb
+
+sudo parted /dev/sdb
+--Create GPT Partition Table: Inside parted
+mklabel gpt
+--Create a New Partition:
+mkpart primary ext4 0% 100%
+--Quit parted:
+quit
+--Format the Partition: Now format the new partition with ext4:
+sudo mkfs.ext4 /dev/sdb1
+
+
+
+Ways to Optimize rsync for Large Files:
+1. Use --inplace:
+By default, rsync creates a temporary file during the transfer and then renames it. For large files, you can speed things up by updating the file in place
+
+rsync -av --inplace /path/to/source/largefile /path/to/destination/
+The --inplace flag makes rsync write changes directly to the destination file, which can save time on large files, but it uses more I/O bandwidth and is less safe (in case of interruptions).
+
+2. Use --partial to Resume Transfers:
+If the transfer is interrupted, rsync can resume the file transfer from where it left off. Use the --partial option to keep partially transferred files and restart from where it was interrupted:
+
+
+rsync -av --partial /path/to/source/largefile /path/to/destination/
+If the transfer is interrupted, re-run the same command, and rsync will continue from where it left off.
+
+3. Compression for Network Transfers (-z):
+If you’re copying over a network and have CPU power to spare, compressing the data can help reduce the transfer time:
+
+rsync -avz /path/to/source/largefile /path/to/destination/
+The -z flag compresses data during the transfer, which can save time on slow network connections but may increase CPU usage.
+
+4. Limit I/O or Network Bandwidth (--bwlimit):
+If rsync is affecting the performance of your system or other applications, you can limit the bandwidth used by rsync to prevent it from monopolizing disk I/O or network bandwidth:
+
+rsync -av --bwlimit=10000 /path/to/source/largefile /path/to/destination/
+The above command limits rsync to 10 MB/s.
+
+5. Increase Buffer Size:
+For large file transfers over the network, increasing the buffer size can help improve performance:
+
+rsync -av --sockopts=SO_SNDBUF=524288,SO_RCVBUF=524288 /path/to/source/largefile /path/to/destination/
+This command increases the send and receive buffer sizes to 512 KB.
+
+Check Transfer Speed:
+If you want to track the progress and transfer speed, use --progress:
+
+rsync -av --progress /path/to/source/largefile /path/to/destination/
+This will show the speed of transfer and estimated time remaining.
+
+Conclusion:
+Yes, rsync can handle large files, but the initial transfer of a 1.2 TB file can take time.
+Optimizing rsync with options like --inplace, --partial, and -z (for network transfers) can help speed up the process.
+After the first full transfer, subsequent rsync operations will be much faster, as it will only transfer the differences.
+
+Notice that we can export mdbx snapshots and backup them in different disks ad reimport afterwards. I have to estimate the time consuming operation
+Can be that snapshot part is not that demanding but its import it is. in that case it isirrelevant to backup like this
+I have noticed a deterioration of performances after 20 hours of continuous synch. Conjecture: networking overhead due to too many peers.
+I make a soft restart but configuring max peers could be a solution, unless the problem is different.
+With erigon 3, once stable, all of this, should be addressed and a raid-0 system, speeding up I/O operation should solve the only reasonable bottleneck in syncing.
