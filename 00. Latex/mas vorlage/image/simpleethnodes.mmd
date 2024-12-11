@@ -1,0 +1,28 @@
+graph TB
+    %% Legend
+    subgraph Legend [Legend]
+        style Legend fill:#f9f9f9,stroke:#aaa,stroke-width:1px
+        EL["Execution Layer (EL): Geth, Erigon, Besu"]:::exec
+        CL["Consensus Layer (CL): Lighthouse, Prysm"]:::consensus
+    end
+    
+    subgraph Ethereum_Network [Simplified view Ethereum Network]
+        style Ethereum_Network fill:#f2f2f2,stroke:#000,stroke-width:1px
+        
+        Node1["Node 1<br>EL: Geth<br>CL: Lighthouse"]:::exec
+        Node2["Node 2<br>EL: Erigon<br>CL: Prysm"]:::exec
+        Node3["Node 3<br>EL: Besu<br>CL: Lighthouse"]:::exec
+        Node4["Node 4<br>EL: Nethermind<br>CL: Prysm"]:::exec
+        Node5["Node 5<br>EL: Geth<br>CL: Lighthouse"]:::exec
+        
+        %% Connections
+        Node1 -->|P2P| Node2
+        Node2 -->|P2P| Node3
+        Node3 -->|P2P| Node4
+        Node4 -->|P2P| Node5
+        Node5 -->|P2P| Node1
+    end
+
+    %% Styling for Execution and Consensus layers
+    classDef exec fill:#c2f0c2,stroke:#008000,stroke-width:2px;
+    classDef consensus fill:#cce5ff,stroke:#004080,stroke-width:2px;

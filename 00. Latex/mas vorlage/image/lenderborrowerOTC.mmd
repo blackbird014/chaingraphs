@@ -1,0 +1,15 @@
+graph TD
+    A[Borrower] -->|Sends ERC20 Tokens as Collateral| B(Smart Contract)
+    A -->|Locks Collateral| B
+    C[Lender] -->|Sends ETH| B
+
+
+%%graph TD
+%%    A[Borrower] -->|Repays Loan + Interest| B(Smart Contract)
+%%    B -->|Unlocks Collateral| A
+%%    B -->|Sends ETH| C[Lender]
+
+%%graph TD
+%%   A[Borrower Fails to Pay] --> B(Smart Contract)
+%%    B -->|Transfers Collateral| C[Lender]
+%%    C -->|Sells Tokens| D[Exchange]

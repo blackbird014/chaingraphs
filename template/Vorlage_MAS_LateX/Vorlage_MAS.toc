@@ -1,0 +1,17 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {section}{\numberline {1}Einleitung }{1}{}%
+\contentsline {subsection}{\numberline {1.1}Ausgangslage und Problemstellung}{1}{}%
+\contentsline {subsection}{\numberline {1.2}Ziel der Arbeit}{1}{}%
+\contentsline {subsection}{\numberline {1.3}Aufbau und Vorgehen}{1}{}%
+\contentsline {subsection}{\numberline {1.4}Abgrenzungen}{1}{}%
+\contentsline {section}{\numberline {2}Titel 1}{1}{}%
+\contentsline {subsection}{\numberline {2.1}Untertitel 1}{1}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}Untertitel 2}{1}{}%
+\contentsline {section}{\numberline {3}Letztes Kapitel}{1}{}%
+\contentsline {subsection}{\numberline {3.1}Zusammenfassende Schlussfolgerungen}{1}{}%
+\contentsline {subsection}{\numberline {3.2}Kritik, Beurteilung und Reflektion}{1}{}%
+\contentsline {subsection}{\numberline {3.3}Zukünftiger Stellenwert und Ausblick}{2}{}%
+\contentsline {subsection}{\numberline {3.4}Implikationen für Wissenschaft und Praxis}{2}{}%
+\contentsline {section}{\numberline {4}Literaturverzeichnis}{4}{}%
+\contentsline {section}{\numberline {5}Anhang}{5}{}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

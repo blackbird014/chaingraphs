@@ -1,0 +1,5 @@
+flowchart LR
+  lender(["👤 Lender"]) -->|Lends| pool[("🗄️ Pool")]
+  pool -->|Get Proxy Token| lender
+  pool -->|Borrows| borrower(["👤 Borrower"])
+  borrower -->|Provides Collateral| pool

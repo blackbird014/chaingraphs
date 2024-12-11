@@ -1,0 +1,23 @@
+flowchart TD
+  subgraph subGraph0["Blockchain Data Pipeline"]
+    erigon[("Erigon Node")]
+    graph_protocol[["The Graph Protocol"]]
+    graphql_layer[("GraphQL API")]
+    explorer[("Otterscan Explorer")]
+  end
+
+  subgraph subGraph1["User Interaction"]
+    user[/"User: Data Analyst"/]
+  end
+
+  erigon --> graph_protocol
+  graph_protocol -- Indexes Data --> graphql_layer
+
+  %% User Interaction with numbered steps
+  user --|1. Queries|--> graphql_layer
+  graphql_layer --|2. Returns Results|--> user
+  user --|3. Explore Single Tx|--> explorer
+  user --|4. Analyze Transactions|--> user
+  user --|5. Programmatically Explore Single Tx|--> erigon
+
+  explorer --|Access Transaction Details|--> erigon
