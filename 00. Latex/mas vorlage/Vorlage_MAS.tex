@@ -35,7 +35,8 @@
 \usepackage{caption}  % added by me for text in table
 \usepackage{placeins} %added by me Include this for \FloatBarrier
 \usepackage{float} % Added by me to 'fix' tables
-
+\usepackage{listings}% Added by me to render formatting
+%\usepackage{hyperref} %
 
 
 \pagestyle{scrheadings} 
@@ -63,7 +64,7 @@
 
 \huge{\textbf{Flash loans in ethereum using Aave}}\\[1.5ex]
 \LARGE{Different use cases with specific analysis of applications}\\[6ex]
-\Large{Advanced Studies in Finance / Sustainable Finance Master Thesis 
+\Large{Advanced Studies in Finance /  Finance Master Thesis \\
 Finance Executive Education  \\
 Finance Weiterbildung}\\[1.5ex]
 \Large{Dr. Benjamin Wildiing}\\
@@ -142,6 +143,8 @@ abstract abstract abstract abstract abstract abstract abstract abstract abstract
 \subsection{Aufbau und Vorgehen}
 \subsection{Abgrenzungen}
 
+\newpage
+
 \section{Aave protocol}
 \subsection{Aave lending protocol basics}
 Aave is one of the most used and battle tested lending protocols in DeFi. Before Aave version 1 (V1) there were other solutions for decentralised lending strategy, among them, ethlend which has been founded by the same team and it is the natural Aave precursor; ethlend was  peer to peer (P2P), resulting in a direct lender - borrower matching handled by a smart contract. A traditional finance instrument to represent this is an OTC contract, represented in figure \ref{fig:peer_lending} to which the decentralized finance (DEFI) community added, at first, a layer for decentralisation and peers matching. The P2P approach enables  the credit process in a decentralised environment but is not flexible and is illiquid cause the charged rate and lended amount in a potential loan must be published waiting for an interested counterpart. 
@@ -202,7 +205,7 @@ Borrowing can be at variable or fix rate and each borrowing position has an heal
 \textbf{ethLend} & \textbf{Traditional Finance} \\ \midrule
 Decentralized     & Centralized                \\
 Peer-to-peer (P2P) & Over-the-counter (OTC)     \\
-Fail to pay: Liquidation & Fail to pay: Collateral swap \\ \bottomrule
+Fail to pay: Liquidation & Fail to pay: Liquidation \\ \bottomrule
 \end{tabular}\\
 %%\text{\footnotesize{Comparison between Aave V1 and traditional finance}}
 \label{tab:ethlend_vs_trad_fin}
@@ -273,16 +276,24 @@ When a loan is issued a lending protocol as well as in traditional finance is ex
     \label{fig:etherscanFLoan}
 \end{figure}
 
-The figure \ref{fig:etherscanFLoan} shows the transactions wrapped in a flashloan one. It is possible to recognize the opening of the loan (first transaction) and the repayment with interests (third and fourth transactions).
+The figure \ref{fig:etherscanFLoan} shows the transactions wrapped in a flashloan one. It is possible to recognize the opening of the loan, \ref{fig:etherscanreqFLoan}and the repayment with interests,  \ref{fig:etherscanrepFLoan}.
 
+\begin{figure}[H]
+    \includegraphics[width=1\textwidth]{image/requestFlashloan.png}
+    \caption{Request of the  flashloan}
+    \label{fig:etherscanreqFLoan}
+\end{figure}
 
-
-
+\begin{figure}[H]
+    \includegraphics[width=1\textwidth]{image/repayFlashloan.png}
+    \caption{Repayment of the  flashloan with interest}
+    \label{fig:etherscanrepFLoan}
+\end{figure}
 
 
 Flashloans are the main topic of this paper therefore is critical to clarify how they work. It is extremely common when reading documentation or articles to get confused by the statement that the repayment should happen within the same ethereum transaction: this can be misleading as with ethereum transaction, in this case is intended a transaction which can hold even hundreds of inner transactions as it is showed in Figure \ref{fig:etherscanFLoan}. This example shows a flashloan constituted of just six transactions as it has been chosen quite simple for the specific purpose.
 It is common at this point to be confronted with the question how can many transactions be performed and, in some cases, rolled back.
-To clarify this  it is crucial to recall the definition of transactions and block. Transactions are intended to be cryptographically signed instructions sent from one Ethereum account to another where the account can be a public address associated to private keys typically controlled by a person or a contract account associated to a smart contract and controlled by code, whereas a  block  is a component of the chain, containing among the others a set of transactions and the information to rebuild the chain itself. The nature of blockchain permits the creation of flashloans cause if a set of operations, in this case inner transaction within the flashloan one, is not ending with the full repayment, all the operations will be aborted by not being added to the block, therefore not ending in the blockchain. The flashloan is therefore computed in a precommit phase and the persistency in the blockchain is subordinated to the repayment plus interests.. The described behaviour leads to the creation which doesn't exists in traditional finance and is comparable to a rollback in a traditional relational database where the atomic operation is the full bunch of inner transaction wrapped by the flash loan one. 
+To clarify this  it is crucial to recall the definition of transactions and block. Transactions are intended to be cryptographically signed instructions sent from one Ethereum account to another where the account can be a public address associated to private keys typically controlled by a person or a contract account associated to a smart contract and controlled by code, whereas a  block  is a component of the chain, containing among the others a set of transactions and the information to rebuild the chain itself. The nature of blockchain permits the creation of flashloans cause if a set of operations, in this case inner transaction within the flashloan one, is not ending with the full repayment, all the operations will be aborted by not being added to the block, therefore not ending in the blockchain. The flashloan is therefore computed in a precommit phase and the persistency in the blockchain is subordinated to the repayment plus interests.. The described behaviour leads to the creation of an instrument which doesn't exists in traditional finance and is comparable to a rollback in a traditional relational database where the atomic operation corresponds the set of inner transaction wrapped by the flash loan one. 
 
 \begin{table}[ht]
 \centering
@@ -302,17 +313,17 @@ Block added to the chain & Persist operation in DB \\ \bottomrule
 
 
 
-Flashloans  are not enabling the user to get an infinite loan. The constraint are the liquidity of the pool, as a bigger amount than the pool size  itself cannot be accessed, and borrowing enabled for such pool.
+Flashloans  are not enabling the user to get an infinite loan: borrowing enabled and the liquidity of the pool, as a bigger amount than the pool size  itself cannot be accessed, are the constraints.
 
 
-
+\newpage
 
 \section{Self hosted Ethereum node}
 \subsection {Introduction}
 Ethereum is a distributed network of computers (known as nodes) running software that can verify blocks and transaction data. This is achieved by running on each computer of the network a client software which fullfills the ethereum specification. There are many implementation of such software and, provided that they fullfill all the protocol requirement, the nodes can interact independently from the  implementation they run. 
 \begin{figure}[ht]
     \scalebox{1.4}{\includegraphics[width=0.7\textwidth]{image/simpleethnodes.png}}
-    \caption{Symplified veiw of ethereum nodes}
+    \caption{Simplified view of ethereum nodes}
     \label{fig:ethnodes}
 \end{figure}
 
@@ -321,11 +332,10 @@ The figure \ref{fig:ethnodes} represents few nodes interacting. A node is any in
 \subsection {Self hosted node vs provider}
 This paper is written processing data from a self hosted node. That is not mandatory as it is possible to rely on services created ad hoc. Infura and Alchemy are popular third-party services that provide easy access to Ethereum nodes via APIs, allowing developers to interact with the Ethereum blockchain without running their own node. These services abstract the complexities of node management and provide scalable infrastructure for dApps, smart contract deployments, and blockchain analytics.
 Using such services has the advantage of providing a standardised environment out of the box but comes with some disadvantages. On a bulk analysis API calls can get expensive, there is not a full control on the data accessed, the providers can block access and there are centralisation risks which are exacerbated by relying fully on third party providers.
-Additionally externak providers implies  a lack of control on data while a node implementation gives both the control and tools for accessing such data: being this paper based on data analysis, the choice of a local node provider suitable to self hosting has been prioritised.
+Additionally external providers implies  a lack of control on data while a node implementation gives both the control and tools for accessing such data: being this paper based on data analysis, the choice of a local node provider suitable to self hosting has been prioritised.
 Running a node is not  trivial at the current stage of the ethereum network. An archive node can require more than 10 TB disk space with certain implementations, a good bandwidth, fast disks and a computer with 32 Gb Ram and multicore.
 The next sections address the choice of node type and client implementation
 
-% Table 1: Alchemy vs Infura
 \begin{table}[ht]
 \centering
 \caption{Main characteristic Alchemy and Infura}
@@ -390,13 +400,13 @@ Lighthouse, Prysm & 10--30 GB (Beacon) & N/A & 1--4 GB (Beacon) & N/A & Low \\ \
 \label{tab:ethnodes}
 \end{table}
 
-There are many implementations of full archive nodes and the proper selection is related to  data analysis suitability: save disk space, fast access to data, a client which allow to present the data in an human readable format for easy interpretation. For this purpose  the most common implementations have been tested. The table  \ref{tab:ethnodes} summarises resource requirements for the most common node implementations. 
+There are many implementations of archive nodes and the proper selection is related to  data analysis suitability: save disk space, fast access to data, a client which allow to present the data in an human readable format for easy interpretation. For this purpose  the most common implementations have been tested. The table  \ref{tab:ethnodes} summarises resource requirements for the most common node implementations. 
 Geth is the most widely used Ethereum client, Erigon is designed to be more resource-efficient than traditional Geth, especially in terms of disk usage and sync time.
 Besu is an Ethereum client written in Java, commonly used in enterprise environments.
 Nethermind is a high-performance Ethereum client written in C\# with a focus on speed and configurability.
 Besu and Geth may require more memory depending on the workload.
 
-For the present purpose, a combination of Geth and Lighthouse was tested  (the latter only for consensus) as well as  Geth and Besu; the test of geth and besu aborted while the  second SSD disk installed as volume was half filled (max capacity 10 Tb and strong performance degradation).  Nevermind has not been tested as, being written in C\#, is strongly suboptimal to work on a linux instance: the data related to it are the result of a direct query with chatgpt (the documentation of these tool is tends not to be aligned with the development and therefore to underestimate the resources required: LINK TO DOC AND OFFICIAL STORAGE).
+For the present purpose, a combination of Geth and Lighthouse was tested  (the latter only for consensus) as well as  Geth and Besu; the test of geth and besu aborted while the  second SSD disk installed as volume was half filled (max capacity 10 Tb and strong performance degradation).  Nevermind has not been tested as, being written in C\#, is strongly suboptimal to work on a linux instance: the data related to it are an estimation).
 Considering the data presented in Table \ref{tab:ethnodes} Erigon looks the best fit, because it allows to run an archive node with a standard 4tb ssd disk. All ethereum node are very demanding in term of read write disk performance, therefore maximising the IO would be a plus, and two SSD in raid-0 are a good choice but not mandatory. 
 \begin{figure}[ht]
     \includegraphics[width=0.7\textwidth]{image/powpos.png}
@@ -425,37 +435,644 @@ Geth tools available out of the box \\ \bottomrule
 \label{tab:adverigon}
 \end{table}
 
+\newpage
+
+
 \section{Blockchain explorers}
+\subsection{Introduction} 
+\label{bexp:lintro} 
+Blockchain data are saved linearly in time in blocks keeping a reference to the predecessor, giving origin to a storage structure which is optimised for a decentralised environment but not for data analysis.  A comparison among  well known data storage techniques like  relational databases, key value databases and  nosql ones gives an idea of how storing data answers to different problematics.\\
+A traditional relational database (oracle) is a tool thought to store data in a centralised way with a focus on data atomicity, consistency, isolation and durability (ACID). This characteristics together with scalability and a language, sql, strictly declarative and then optimisable in execution from the db engine itself, are the main reasons of the large success of relational db in the corporate environment. \\
+Another way of storing data is represented by nosql dbs which come as Key-value pair,Document-oriented, Column-oriented and Graph-based.
+Key value databases have recently found plenty of application: mimicking an hasthable (map) data structure, they are  providing an extremely fast  read access and are scalable in a cloud architecture. Such a data structure found the first application in caches, generalising at a cloud level, what was already known in the host environment with tools like memcache and other similar ones as cask. In a cloud environment and, in general, in a network intensive environment, key value db like level2 and mdbx have found great applications and they are the core of many ethereum client software like geth and erigon where storage size and faast read access are important. \\
+Another storage, very common nowadays is the so called  graph db whose implementation examples are neo4J or mongoDb. A  relevant application of such dbs is storing hierarchical data in a natural way, which is prevented by  design in a relational db: graph data structures, payload of web services, xml and json data format as the web page structure itself are all best suited to be handled through graph db. \\
+Document and column database have found a great traction in the cloud environment related to big data: while a relational db is optimal in corporate to store data 'polished' and consistent, a document or columnar db allows to quickly store giant amount of unstructured data which can be processed and structured in later steps. A typical scenario is to have applications which are processing the nosql data to polish them and store the extracted and transformed data subset in a relational DB.
+
+
+
+
+
+
+It is clear, from table \ref{tab:dbtypes}  that each data storage has a clear motivation and, apart from legacy systems, where they can be misused because of the difficulty of migrating data while keeping business requirement, in greenfield projects it is natural to chose the most convenient data storage based on requirements.
+In a blockchain the data persistency for  analysis is a secondary requirement and a set of tool have been created to facilitate this task. The main categories are two: ETL (extract transform load) systems, where data from the ethereum client are accessed in read mode, transformed and loaded (persisted) in a 3rd party DB which is selected for pure data analysis  or direct access to indexed data of the ethereum client.There are four main types of interactions with the ethereum client: direct query of blockchain data, a programmatic approach on the node itself, UI rendering of indexed data of the node, query of data stored in third party DBs via sql or programmatically, UI rendering of data in third party DB. 
+
+
+\begin{table}[ht]
+\centering
+\caption{Database Types, Implementations, and Usage}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{0.3\textwidth} p{0.3\textwidth} p{0.4\textwidth}} \toprule
+\textbf{Database Type} & \textbf{Implementations} & \textbf{Usage} \\ \midrule
+Relational & MySQL, PostgreSQL, Oracle & Structured data management, Transactions \\ 
+Key-Value & LevelDB, MDBX , AWS DynamoDB & Fast read access,  Low footprint \\ 
+Graph DB & Neo4j,  MongoDB & Hierarchical, Connected structures \\ 
+Document DB & MongoDB & Big data, Data lakes \\ 
+Columnar DB & Google BigQuery & Big data, Analytics \\  \bottomrule
+\end{tabular}%
+}
+\label{tab:dbtypes}
+\end{table}
+
+
+
+For the purpose of this work it is strongly advantageous to have an application which allows to visualise the transactions stored in the node. This is normally achieved through UI web applications, where the browser is the natural UI client, called blockchain explorers. These UI could access data indexed in the node or moved through ETL to 3rd party db. In the next sections is presented and motivated the choice for the explorer lately used in flashloans analysis.
+
+
+
 \subsection{Blockchain explorer usage}
-A blockchain explorer is a crucial tool for viewing, analyzing, and understanding data on a blockchain. It transforms complex, encoded information into human-readable form, making it easier to track transactions, verify addresses, explore smart contracts and can perform, in some case, some statistical analysis on behalf of the end user. Without a blockchain explorer, transaction data and smart contract interactions appear as hex-encoded information, which is not human-readable: below a set of pictures of a transaction in etherscan (the most used blockchain explorer), in otterscan (the explorer integrated in erigon) and raw data polling the node shows the difference between raw data and the same data rendered in an explorer  the importance of utilising properly an explorer or a combination of them.
+
+A blockchain explorer is a webapp UI which plays the role of crucial tool for viewing, analyzing, and understanding data on a blockchain. It transforms complex, encoded information into human-readable form, making it easier to track transactions, verify addresses, explore smart contracts and can perform, in some case, some statistical analysis on behalf of the end user. Without a blockchain explorer, transaction data and smart contract interactions appear as hex-encoded information, which is not human-readable: below a set of pictures of a transaction in etherscan (the most used blockchain explorer), in otterscan (the explorer integrated in erigon) and raw data polling the node shows the difference between raw data and the same data rendered in an explorer making evident the importance of using properly an explorer or a combination of them.
 
 
-FIGURES HERE AND COMMENTS
+\begin{figure}[ht]
+    \includegraphics[width=1.0\textwidth]{image/explorers/uniswapLPetherscan.png}
+    \caption{View LP USDC-WETH in etherscan}
+    \label{fig:ethlp}
+\end{figure}
+
+The figure \ref{fig:ethlp} shows a liquidity pool in Uniswap V3 through etherscan.  Uniswap is the most famous and widely used decentralized exchange, therefore a primary Defi primitive (the term primitive is part of Defi lingo and indicates a building block of potentially larger processes where many primitives are connected),  which allows to swap tokens through decentralised trading pairs. The protocol is quite complex and this paper doesn't aim to explain how it works, but  it represent  a good example of how a blockchain explorer can simplify the analysis of a transaction. The liquidity pool that is represented in the picture is created triggering another smart contract (uniswap liquidity pool factory) and there are plenty of similar  pools of trading pairs created the same way. The specific pool  is the trading pair USDC-WETH, two ERC-20 tokens (ERC-20 is a standard for tokens on the ethereum blockchain, that defines a set of features and rules for issuing and managing tokens ensuring interoperability ) who have a considerable liquidity. 
 
 
-The pictures show the same transaction: calling a Uniswap contract to swap tokens.  An explorer decodes the data, showing details like token names, transfer amounts, and method names, so users can understand what actions are taking place.
-the raw data instead look like a series of encoded hexadecimal strings. Decoding is done programmatically using a set of rules known as the Ethereum Application Binary Interface (ABI). The ABI defines how to encode and decode function names and parameters for Ethereum smart contracts, allowing a blockchain explorer or other tools to convert raw transaction data into human-readable formats. Several libraries make ABI decoding relatively straightforward, especially for developers building tools or explorers:  web3.js,  ethers.js, Web3.py.
-For common contracts like Uniswap or ERC-20 tokens, the ABI files are usually public and can be added to the explorer's ABI database. These ABIs can be used to automatically identify functions and parameters, enabling accurate decoding.Blockchain explorers identify known smart contracts, such as Uniswap in the example above, by using their contract address and displaying relevant details, like contract name and functions. This allows users to recognise trusted contracts versus unknown ones, adding a layer of security when interacting with decentralized finance (DeFi) apps and other dApps.
-Explorers like Etherscan and Otterscan can show verified source code and contract metadata (if available) to give insights into the contract’s purpose and functionality. In analysing a transaction sent to a Uniswap contract to perform a token swap the destination address (Uniswap’s contract) and the hex-encoded transaction data (e.g., `0x18cbafe5` followed by more data) couldn’t be interpreted easily. An explorer decodes this, revealing that `0x18cbafe5` maps to `swapExactTokensForTokens` and decodes other parameters, showing token addresses, amounts, and recipient addresses. 
+\subsection{Analyse transactions in blockchain explorers}
+
+Given a contract view like in figure \ref{fig:ethlp}, it is possible to expand one of the  transactions triggered by it: in the figure below is showed a swap (exchanging a token for another).
 
 
 
 
-In appendix xxx we show how to decode transactions in a purely programmatically way. This proofs the utility of explorers and shows what we nseed to do when explorer are not sufficient.
-\subsection{Analyse tx in blockchain explorers}
-Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt  
+\begin{figure}[ht]
+    \includegraphics[width=1.0\textwidth]{image/explorers/transaction_swap.png}
+    \caption{View a swap transaction in etherscan}
+    \label{fig:etherscantx}
+\end{figure}
+
+%\begin{figure}[ht]
+  %  \includegraphics[width=0.7\textwidth]{image/explorers/otterscan.png}
+   % \caption{view a transaction in otterscan}
+    %\label{fig:otterscantx}
+%\end{figure}
+
+
+
+
+The figures  \ref{fig:logseth} show the same transaction in different explorers: calling the Uniswap V3  usdc-weth LP  to swap tokens; an LP is a Liquidity Pool, the entity which allows to perform tokens swaps by creating a trading pair, as the pair usdc-weth in the figure.  An explorer decodes the data, showing details like token names, transfer amounts, and method names, so users can understand what actions are taking place.
+
+
+\begin{figure}[ht]
+    \includegraphics[width=1.0\textwidth]{image/explorers/swapLogs.png}
+    \caption{View transaction logs in etherscan}
+    \label{fig:logseth}
+\end{figure}
+
+The logs view in Etherscan, figure  \ref{fig:logseth}, decodes the event logs emitted by smart contracts during the execution of a transaction, in this case a Uniswap swap.  Without the explorer the swap would appear, as saved in the node database,  like a cryptical string \\
+0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67 rendered as Topic 0 in the UI. It  represents the Keccak-256 hash of the event’s signature which  is how specific events are identified on the Ethereum blockchain.
+In the specific case the string is obtained applying the Keccak-256 hashing to the following signature
+
+\begin{figure}[ht]
+\centering
+\begin{lstlisting}[basicstyle=\ttfamily, breaklines=true, keepspaces=true, 
+                 linewidth=\textwidth, frame=single, escapeinside={\%*}{*}]
+Swap(
+    address indexed sender,
+    uint amount0In,
+    uint amount1In,
+    uint amount0Out,
+    uint amount1Out,
+    address indexed to
+);
+\end{lstlisting}
+\caption{Signature of the swap method}
+\label{lst:swap_event}
+\end{figure}
+
+
+the full correspondent raw data instead look like a series of encoded hexadecimal strings. 
+
+
+\begin{figure}[H]
+\centering
+\begin{lstlisting}[basicstyle=\ttfamily, breaklines=true, keepspaces=true, 
+                 linewidth=\textwidth, frame=single, escapeinside={\%*}{*}]
+{
+  "address": "0xPoolContractAddress",
+  "topics": [
+    "0xc42079f94a6350d7e6235f29174924f928cc2ac818e
+   b64fed8004e115fbcca67", // Swap event signature
+    "0xSenderAddress", // Sender (indexed)
+    "0xToAddress"      // Recipient (indexed)
+  ],
+  "data": "0x0000000000000000000000000000000000000
+              0000000000000000000005f5e100000000000000
+              000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000
+           000000000000000000000000000000000000989680"
+}
+\end{lstlisting}
+\caption{Logs of the swap method}
+\label{lst:swap_event_log}
+\end{figure}
+
+
+
+\begin{table}[ht]
+\centering
+\caption{Comparison of Raw Data and Explorer Features}
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+\hline
+\textbf{Raw Data} & \textbf{Explorer} \\ \hline
+Raw data logs & Logs presented in a structured and user-friendly format \\ 
+Keccak256 hashed method signature & Human-readable method signature \\ 
+Indexed parameter values only & Indexed parameter descriptions and values \\ 
+Non-indexed data in a unique block in hexadecimal format & Non-indexed data with descriptions and values \\ 
+--- & Additional features depending on the explorer \\ \hline
+\end{tabular}
+\label{tab:raw_vs_explorer}
+\end{table}
+
+
+In general the decoding operation showed above, allowing to present in a human readable format method, parameters and their values,  is done programmatically using a set of rules known as the Ethereum Application Binary Interface (ABI). The ABI defines how to encode and decode function names and parameters for Ethereum smart contracts, allowing a blockchain explorer or other tools to convert raw transaction data into human-readable formats. Several libraries make ABI decoding relatively straightforward, especially for developers building tools or explorers:  web3.js,  ethers.js, Web3.py.
+For common contracts like Uniswap or ERC-20 tokens, the ABI files are usually public and can be added to the explorer ABI database, which works like a dictionary where the keccak256 hashes are mapped to the method signature. These ABIs can be used to automatically identify functions and parameters, enabling accurate decoding. Blockchain explorers identify known smart contracts, such as Uniswap in the example above, by using their contract address and displaying relevant details, like contract name and functions. This allows users to recognise trusted contracts versus unknown ones, adding a layer of security when interacting with decentralized finance (DeFi) apps and other dApps.
+Explorers like Etherscan and Otterscan can show verified source code and contract metadata (if available) to give insights into the contract’s purpose and functionality.\\
+In analysing a transaction sent to a Uniswap contract to perform a token swap the destination address (Uniswap’s contract) and the hex-encoded transaction data (e.g., `0x18cbafe5` followed by more data) couldn’t be interpreted easily. An explorer decodes this, revealing that `0x18cbafe5` maps to `swapExactTokensForTokens` and decodes other parameters, showing token addresses, amounts, and recipient addresses. 
+This is particularly beneficials when trying to interprete a flashloan by decoding  the  transactions wrapped between the opening of the loan and its full repayment. The table  \ref{tab:raw_vs_explorer}  shows how the raw data saved in the node client without the help of an explorer or some written ad hoc program would be quite difficult to interprete.
+
+
+
+
 \subsection{Explorer selection}
-\subsection{Implikationen für Wissenschaft und Praxis}
-Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt 
+
+The explorer selection is a necessary step to deal with the complexity of flashloans. Apart from the de facto standard, which is etherscan, a proprietary close code solution, there are several open-source and free applications that can be installed locally on a self-run Ethereum node. These applications offer functionality similar to Etherscan, the most famous publicly available with limited functionality, including the ability to explore blockchain data, track transactions, and interact with smart contracts. The requirement is to find an implementation well coupled with an Erigon node and with minimal disk requirements and for this  the most known free open source solutions have been analysed.  \\
+BlockScout is a versatile and open-source blockchain explorer which supports Ethereum and other Ethereum-compatible networks and can be installed on a local Ethereum node to provide Etherscan-like functionality. \\
+Etherchain Explorer is another open-source project that offers blockchain exploration functionality. It's designed to work with Ethereum nodes and provides a web interface to explore blockchain data. \\
+Ethereum-ETL is a tool for extracting, transforming, and loading Ethereum blockchain data. While it is more focused on data extraction and transformation, it can be used in conjunction with other tools to build a custom blockchain explorer. \\
+Otterscan is a lightweight, open-source Ethereum block explorer embedded in erigon and available as standalone application. All the mentioned explorers, except otterscan require to install an additional DB and rely on ETL to transform chain data and load them in their schema. Otterscan relies on erigon internal mdbx db and, unless instructed differently, uses the erigon indexing process, therefore adding ZERO disk space to the synchronised node. It is especially appealing for developers and researchers who want to avoid reliance on third-party services. Unlike some explorers that require high bandwidth or storage, Otterscan’s design optimizes for performance and fast data retrieval.\\
+After some additional test Otterscan and etherscan have prooved to be the best fits: Otterscan to be used in combination with the self hosted node, etherscan to compelment it in certain cases. While Otterscan provides already a complete solution not all the encoded method signatures have been  decoded during the indexing process, on the other hand etherscan seems to be quite complete in this sense but it is proprietary and cannot ensure to give a full access to the full history as required from this paper. Therefore an hybrid solution, having ehterscan as an helper tool has proofed to be the most effective.
+
+
+\newpage
+
+
+
+\section{The Graph protocol}
+
+\subsection{Introduction}
+
+The Graph is an indexing decentralized protocol which adds another dimension to the indexing performed from the node client itself. It is necessary to query in a performant and detailed way specific dApps / protocols like Aave.  In the next sections is presented how the graph addresses the need of an additional process for indexing dApps/protocols data, then is given an overview on the positioning of The Graph in the blockchain landscape  as well as a description of how it works. The last section is dedicated to explain the usage of  The Graph within this paper.
+
+
+\subsection{Need of indexing the blockchain}
+
+The concept of indexing has been presented  in \ref{bexp:lintro}  in the context of choosing a blockchain explorer accessing indexed data. Indexing is permeating very deeply computer science and can play a role in analysing text documents, classifying documents, speed up searches, minimizing I/O operations or facilitating queries. 
+
+
+\begin{table}[H] % Use [H] to enforce placement
+\centering
+\caption{Comparison of Indexing in Computer Science and The Graph Protocol}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcc}
+\toprule
+\textbf{Aspect} & \textbf{General Computer Science} & \textbf{The Graph Protocol} \\ 
+\midrule
+\textbf{Purpose} & Data access optimization & Blockchain data querying \\ 
+\textbf{Core Mechanism} & Data structures (trees, hash tables, inverted indexes) & Subgraphs (customized schemas for blockchain data) \\ 
+\textbf{Query Language} & SQL, Key-Value lookups, etc. & GraphQL \\ 
+\textbf{Data Sources} & Files, databases, memory & Blockchain (e.g., Ethereum, IPFS) \\ 
+\textbf{Real-Time Updates} & Not always guaranteed & Enabled via event-driven indexing \\ 
+\textbf{Scalability} & Relies on architecture scaling strategies & Decentralized indexing with distributed nodes \\ 
+\bottomrule
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table compares the roles of indexing in general computer science and The Graph Protocol, highlighting key differences in purpose, mechanisms, and scalability.}
+\label{tab:indexing_comparison}
+\end{table}
+
+The protocol The Graph cover  an indexing process not addressed  by Erigon: Erigon is actually providing a database general indexing which takes care of the common blockchain query optimisations, as it cannot handle single application data, being this possible only studying in detail the way the app is saving those in the blockchain.
+The Graph builds application-specific indexes (subgraphs) tailored to specific needs of decentralized applications (dApps) like summarizing token transfers, aggregating DeFi positions, or fetching NFT metadata; such indexing cannot be done in an abstract  way by a generic blockchain node client, because requires a deep knowledge of the dApp indexed. Leveraging such indexing allows to perform complex queries without having to programmatically process the full chain data or to study the implementation detail of single protocols. It addresses the need of  dApps intercommunication in real time as well as data aggregation offering for it a decentralized network. The last point is important as a centralised usage of single dapps/protocols would neglect the main point of blockchain itslelf: decentralisation. 
+
+\begin{table}[H] % Use [H] to enforce placement
+\centering
+\caption{Schematic Comparison: Erigon vs. The Graph Protocol}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcc}
+\toprule
+\textbf{Aspect} & \textbf{Erigon} & \textbf{The Graph Protocol} \\ 
+\midrule
+\textbf{Primary Focus} & Raw blockchain indexing & Application-specific indexing \\ 
+\textbf{Query Interface} & JSON-RPC, SQL-like queries & GraphQL \\ 
+\textbf{Real-Time Updates} & Limited & Event-driven updates \\ 
+\textbf{Data Aggregation} & Requires custom implementation & Built-in through subgraphs \\ 
+\textbf{Infrastructure} & Self-hosted & Decentralized network \\ 
+\textbf{Ease of Use} & Developer-intensive & Plug-and-play for dApps \\ 
+\textbf{Use Case} & Blockchain explorers, historical data & dApps requiring structured data \\ 
+\bottomrule
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table compares Erigon and The Graph Protocol in terms of focus, usability, infrastructure, and support for decentralized applications.}
+\label{tab:erigon_vs_graph}
+\end{table}
+
+
+\subsection{Positioning of The Graph. Overview}
+
+The Graph position itself as the google of the blockchains as it allows to efficiently access blockchain data, with the additional advantage of not  relying on centralised services, offering faster and scalable access to information on-chain. Technically The Graph is a decentralised query protocol used for indexing and caching data from blockchains like Ethereum and storage networks. The vision behind The Graph is that Decentralised Applications (dApps) put users in control of their data and to create a wide-scale economic opportunity is needed an interoperability layer between web apps where applications are provided with a common way to query data. The Graph aims to provide a decentralised Query execution Layer for web 3. 
+
+\begin{figure}[ht]
+    \centering % Center the image
+    \includegraphics[scale=0.5]{image/thegraph/positioning.png}
+    \caption{The Graph in the blockchain landscape}
+    \label{fig:thegraphctx}
+\end{figure}
+
+
+
+\subsection{How The Graph works}
+In the official whitepaper is described how The Graph achieves its goals of being a decentralised query execution layer addressing end users, app developers, the graph node operators, data source creators and the graph network validators. Summarising The Graph address indexing by allowing developers to create custom subgraphs, specialized datasets that define what data to extract from the blockchain and how it should be indexed. Once a subgraph is created, it processes new blocks, extracts relevant data, stores them in a relational Db deployed in each The Graph network node and makes it publicly available for querying using GraphQL, an efficient query language.
+
+
+\subsection{Usage of The Graph}
+For the purpose of this paper  providing a subgraph, equivalent of a custom Aave V2 data indexing, is not needed. It would be a difficult operation already covered by reliable and verifiable third parties which, following the protocol rules, are offering a well documented and standardised access to decentralised indexes. Differently from what has been done  for the ethereum itself, setting up a node, no active action of this kind is performed with The Graph. Running a node in The Graph protocol is extremely demanding in term of resources , disk space and network bandwith; it make sense for companies which are setting up a large scale data analysis, selling data, or for some dApps to facilitate the usage of their own protocols in combination with others.  There is actually no need of setting up an ad hoc node or curate the indexing of Aave V2 as the goal is to access data for a specific protocol based on an existing indexing  provided by a reliable curator, for this paper purpose Messari, using the exposed query language, graphql, which constitutes the external layer in front of the data sets which are exposed as REST endpoints. The protocol structure is  transparent and the focus, for this paer purpose, is shifted on the query  usage to get access to meaningful data which facilitate finding interesting flashloans. Messari is specialized in data analytics and provides open source data indexing of various blockchain leveraging The Graph, adding data presentation and deployment automatisation stategies. 
+Owning an ethereum node allows to use the extracted data and countercheck their validity in combination with a blockchain explorer.
+
+\begin{figure}[ht]
+    \includegraphics[width=1.0\textwidth]{image/thegraph/process.png}
+    \caption{Usage of the graph in combination with erigon node and otterscan}
+    \label{fig:processthegraph}
+\end{figure}
+
+This paper leverages The Graph exposed endpoints for indexed Aave V2 data. The approach is to send different requests to filter data which facilitate further investigation. In presenting possible usage of flashloans, without a criterion to select potential arbitrages, or protocol attacks (literally hacking of protocol financed through flashloans) or collateral swapping would be almost impossible to find significant transitions without processing all the flashloans calls and examining them punctually. This is a colossal challenge as a flashloan is often wrapping plenty of transactions, even hundreds. An heuristic approach like selecting the largest 20 flashloans issued since inception assuming they will be used for an arbitrage or for hacking a protocol increases the probability of finding such transactions. A blockchain explorer helps in their analysis afterwards. This suggest  that an effective pattern of work consists in using in the following order The Graph, a blockchain scanner, otterscan/etherscan or direct queries on the node like erigon api calls if needed. The graph queries with less restrictive filters provide bulk exports of data which could be used to perform statistical analysis as flashloans usage on time by account type and size.
+The Graph itself  runs on Arbitrum , an L2 chain chosen for low gas cost solution, as indexing service. The indexed data are selected from the proper chain, ethereum,  stored through mappers in a db and exposed as already explained. Arbitrum is just a convenient solution for the protocol management.
+
+\begin{table}[H] % Use [H] to enforce placement
+\centering
+\caption{Summary: Leveraging The Graph for Aave V2 Flashloan Analysis}
+\resizebox{\textwidth}{!}{%
+\begingroup
+\fontsize{8.5}{10}\selectfont % Reduces character size by approximately 15%
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{Aspect} & \textbf{Details} \\ 
+\hline
+\textbf{Purpose} & Utilize The Graph endpoints to index and filter Aave V2 data for analysis of flashloans and related activities. \\ 
+\hline
+\textbf{Challenge} & Analyzing flashloans is complex due to their wrapping of multiple transactions (sometimes hundreds), making it hard to identify significant patterns without processing all calls. \\ 
+\hline
+\textbf{Potential approach} & 
+Use The Graph for bulk data extraction with less restrictive filters.  
+Apply heuristics (e.g., focus on the largest 20 flashloans) to narrow the scope.  
+Analyze selected transactions using blockchain explorers (e.g., Otterscan/Etherscan) or direct node queries (e.g., Erigon API). \\ 
+\hline
+\textbf{Insights Enabled} & 
+Statistical analysis of flashloan usage over time by account type and size.  
+Identification of potential arbitrages, protocol attacks, or collateral swaps. \\ 
+\hline
+\textbf{Infrastructure} & 
+- \textbf{The Graph}: Queries indexed data from Ethereum and exposes it via endpoints.  
+- \textbf{Arbitrum}: Used as a low-cost Layer 2 solution for managing The Graph's indexing service. \\ 
+\hline
+\textbf{Workflow Pattern} & 
+Query data using The Graph.  
+Perform detailed analysis with blockchain scanners or direct node queries if needed. \\ 
+\hline
+\end{tabular}%
+\endgroup
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table summarizes the approach and workflow for leveraging The Graph to analyze Aave V2 flashloan data, including infrastructure, challenges, and insights gained.}
+\label{tab:flashloan_analysis}
+\end{table}
+
+
+\subsection{The Graph: technical view}
+
+To understand how The Graph works under the hood is useful a simplified example of creating, deploying  and indexing a subgraph. After this is done it is possible to query the indexed data according to the defined interface. The steps consist in defining the subgraph.yaml, writing a mapper from blockchain data to indexed data telling how to transform and to save them in the db (at the moment a postgresql db), define the query language through GraphQL schema, deploying the subgraph, signalling to indexers to start to process it and finally having the data available to be queried by end users. In this paper the only step directly performed is \textbf{\textit{Querying}} the proper subgraph. This section explains what The Graph protocols and actors (curators and indexers) do to allow to run queries on a subgraph.
+
+\begin{table}[H]
+\centering
+\caption{Schematic Summary of Subgraph Workflow in The Graph}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Step} & \textbf{Description} \\ \hline
+\textbf{Prerequisites} & Install Node.js, Yarn, and Graph CLI for subgraph management. \\ \hline
+\textbf{Define Subgraph} & Create `subgraph.yaml` specifying network, contract address, events, and mapping files. \\ \hline
+\textbf{Mapping Handlers} & Use AssemblyScript to process blockchain events into database-storable format. \\ \hline
+\textbf{GraphQL Schema} & Define data structure for querying (e.g., entities like transfers). \\ \hline
+\textbf{Deploy Subgraph} & Deploy the subgraph using `graph deploy` command to a hosted service or decentralized network. \\ \hline
+\textbf{Indexing} & Indexers, incentivized by curators staking GRT, process and store the data. \\ \hline
+\textbf{Querying} & Query indexed data using GraphQL (e.g., retrieve transfers sorted by value). \\ \hline
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table outlines the main steps for creating, deploying, indexing, and querying a subgraph in The Graph ecosystem.}
+\label{tab:subgraph_workflow}
+\end{table}
+
+\textbf{\textit{Technical prerequisites}}
+\begin{lstlisting}[language=bash, caption={Installation Commands for Subgraph Setup}, label={lst:install_commands}, basicstyle=\ttfamily\scriptsize]
+# Install Node.js and Yarn (package managers for JavaScript)
+# Install Graph CLI, a command-line tool to generate and manage subgraphs
+npm install -g @graphprotocol/graph-cli
+\end{lstlisting}
+
+
+
+\textbf{\textit{Define the Subgraph}}
+
+The process begins by defining a subgraph that specifies which events, functions, or data  to index from the blockchain. It is needed to provide a Subgraph Manifest as a YAML file (called `subgraph.yaml`) where you define your subgraph by including the network (Ethereum, Polygon, etc.), the contract addresses you're tracking and the specific smart contract events or functions to index.
+
+\begin{lstlisting}[language=xml, caption={Example subgraph.yaml}, label={lst:subgraph_yaml}, basicstyle=\ttfamily\scriptsize]
+specVersion: 0.0.2
+description: Example subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: MyContract
+    network: mainnet
+    source:
+      address: "0x123...abc"
+      abi: MyContract
+      startBlock: 12345678
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - MyEntity
+      abis:
+        - name: MyContract
+          file: ./abis/MyContract.json
+      eventHandlers:
+        - event: Transfer(indexed address, indexed address, uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+\end{lstlisting}
+   
+
+\textbf{\textit{Write the Mapping Handlers}}
+
+Mapping handlers are written in AssemblyScript and define how to process specific blockchain events. When the specified event occurs, the handler transforms it into a format that can be stored in the subgraph (saving it in a database).
+
+
+\begin{lstlisting}[language=xml, caption={Example handler for a Transfer event}, label={lst:transfer_handler}, basicstyle=\ttfamily\scriptsize]
+import { Transfer } from '../generated/MyContract/MyContract'
+import { MyEntity } from '../generated/schema'
+
+export function handleTransfer(event: Transfer): void {
+  let entity = new MyEntity(event.transaction.hash.toHex())
+  entity.from = event.params.from
+  entity.to = event.params.to
+  entity.value = event.params.value
+  entity.save()
+}
+\end{lstlisting}
+  
+
+This code defines how to extract event parameters (`from`, `to`, `value`) and store them in the subgraph.
+
+\textbf{\textit{Define the GraphQL Schema}}
+
+The schema defines how the data should be structured and queried. It is what the end user will call.
+
+
+\begin{lstlisting}[language=xml, caption={Example GraphQL Schema}, label={lst:graphql_schema}, basicstyle=\ttfamily\scriptsize]
+type MyEntity @entity {
+  id: ID!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt!
+}
+\end{lstlisting}
+ 
+
+This GraphQL schema defines the structure of the entity (e.g., transfers) you’re indexing from the blockchain.
+
+\textbf{\textit{Deploy the Subgraph}}
+After defining the subgraph and handlers, deploy the subgraph to The Graph’s decentralized network or hosted service using:
+
+\begin{lstlisting}[language=bash, caption={Graph Deploy Command}, label={lst:graph_deploy}, basicstyle=\ttfamily\scriptsize]
+graph deploy --node https://api.thegraph.com/deploy/ <your-subgraph-name>
+\end{lstlisting}
+ 
+\textbf{\textit{Indexing}}
+After deployng, the job of the curator role is finished. The data are not yet available to be queried. Somebody has to index the data. This is the role of the Indexer which are incentivised to participate by the curators themselves. A curator stake some native token, GRT, and broadcasts a signal in the network. Indexers are compensated with these GRT for their work and the resources they make available.
+
+\textbf{\textit{Querying}}
+Once the subgraph is indexed, the end user can query it using GraphQL which allows to request specific data efficiently.
+
+\begin{lstlisting}[language=xml, caption={Query for the Top 5 Token Transfers Sorted by Value}, label={lst:query_transfers}, basicstyle=\ttfamily\small]
+{
+  myEntities(first: 5, orderBy: value, orderDirection: desc) {
+    from
+    to
+    value
+  }
+}
+\end{lstlisting}
+
+
+This query retrieves the 5 largest "myEntities" from the subgraph deployed  sorted by value.
+
+
+\newpage
+
+\section{Data analysis process}
+
+\subsection{Introduction}
+The previous  chapters present the main protocol studied in this work and the tools which allow to perform data analysis on it. 
+The process followed is quite standardised and this chapter shows how it works in a general way 
+
+\subsection{Analysis Tools}
+The Graph allows to identify a set of potential interesting flashloans by querying via graphql the Messari subgraph. The request criteria sent to the public interface can be different depending on the analysis which is addressed. In this section the methodology is presented in general and an example is provided. Once a set of parameters has been decided the output from graphql can be analysed in various ways. A query can return a bulk amount of data, for example last 5000 flashloans, and the analysis can just focus on the returned data, by sorting and classifing them: this need a good data analysis toolbox, typically python and its rich data analysis and presentation libraires. Another informative approach is setting up criteria which are likely to isolate few trades, therefore returning a limited number of results, and study them in detail. For example a query can select flashloans which were presenting a profit when closed, sorted from the largest and picking the top 10, or count flashloans by month since inception and study  correlations between this number and variables as ethereum gas price or ethereum price itself to mention some.  This paper relies on the  approach of selecting few meaningful trades and analyse them. 
+Once the flashloans are selected, the blockchain explorer and the local node role becomes relevant as the single transactions need  to be checked in details.
+Selecting the top 10 largest flashloans gives five different use cases which are presented in dedicated chapters. 
+
+\subsection{Transaction list}
+
+This section present an example of query to the Messari subgraph. Technically this means that Messari, as curator, has defined a subgraph to index and persist the Aave V2 data and an interface to query them and indexers have picked up the task of actually processing the subgraph exposing it to the general public. 
+The graphql service is exposed via https at \\
+
+\texttt{https://thegraph.com/explorer/subgraphs/\break
+C2zniPn45RnLDGzVeGZCx2Sw3GXrbc9gL4ZfL8B8Em2j?\break
+view=Query\&chain=arbitrum-one}
+
+\begin{figure}[ht]
+    \centering % Center the image
+    \includegraphics[width=\textwidth]{image/process/messari.png} % Scale image to fit the text width
+    \caption{Messari Aave V2 Interface}
+    \label{fig:aavemessari}
+\end{figure}
+
+\vspace{0.5cm} % Adds some space between figure and listing
+
+the figure \ref{fig:aavemessari} show the request in this example on the left side, the response in the center and the possible parameters on the right. A query can be composed and tested  on line using this  right side schema. The schema are providing in yaml format, a common standard, which allows in every main development language to rely on code generators to eventually access the endpoint programmatically.\\
+The request sent:
+
+
+\begin{lstlisting}[language=xml, caption={Example JSON request for flashloans}, label={lst:fl_example}, basicstyle=\ttfamily\scriptsize]
+{
+  flashloans(first: 1000, orderBy: amount, orderDirection: desc) {
+    id
+    amount
+    timestamp
+    amountUSD
+    gasUsed
+    gasPrice
+    feeAmountUSD
+    blockNumber
+    hash
+  }
+}
+\end{lstlisting}
+  
+
+The response, which include 1000 entries, can be processed programmatically or analysed punctually depending on the goal. Ordering by gasPrice or gasUsed shows  another criterion to extract value from the same query.
+
+
+For the purpose of this paper the following query has allowed to extract all the meaningful transactions.
+
+\begin{lstlisting}[language=xml, caption={ JSON request for top 10  usd amount flashloans }, label={lst:fl_topten}, basicstyle=\ttfamily\scriptsize]
+{
+  flashloans(first: 10, orderBy: amount, orderDirection: desc) {
+    id
+    amount
+    timestamp
+    amountUSD
+    blockNumber
+    hash
+  }
+}
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=xml, caption={ JSON response for top 10 usd amount flashloans}, label={lst:fl_topten_rsp}, basicstyle=\ttfamily\scriptsize]
+{
+  "data": {
+    "flashloans": [
+      {
+        "amount": "350000000000000000000000000",
+        "amountUSD": "349597751.4474315409598895928248957",
+        "blockNumber": "14602790",
+        "hash": "0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad7",
+        "id": "0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad76900000006000000",
+        "timestamp": "1650198256"
+      },
+      {
+        "amount": "78465988600582788297000000",
+        "amountUSD": "78488458.63395031958301255403372147",
+        "blockNumber": "12765761",
+        "hash": "0x7567551456d5bafc6816e40b3dfa27de4040d140430c7d815e641d301755fb0b",
+        "id": "0x7567551456d5bafc6816e40b3dfa27de4040d140430c7d815e641d301755fb0b3001000006000000",
+        "timestamp": "1625464917"
+      },
+      {
+        "amount": "77926704000000000000000000",
+        "amountUSD": "78097069.42128388169628392697528458",
+        "blockNumber": "12428389",
+        "hash": "0xa55285d2d43562befbc4d2e76e722f4e34973a42cfe9f40b5222bf0f68bb8841",
+        "id": "0xa55285d2d43562befbc4d2e76e722f4e34973a42cfe9f40b5222bf0f68bb8841a500000006000000",
+        "timestamp": "1620939686"
+      },
+      {
+        "amount": "50000000000000000000000000",
+        "amountUSD": "30444198.7266429157239672265873159",
+        "blockNumber": "17845588",
+        "hash": "0x006763dff653ecddfd3681181a29e7e6d6c2aaa7bafb27fe1376f3f7ce367c1e",
+        "id": "0x006763dff653ecddfd3681181a29e7e6d6c2aaa7bafb27fe1376f3f7ce367c1ea102000006000000",
+        "timestamp": "1691200055"
+      },
+      {
+        "amount": "38100000000000000000000000",
+        "amountUSD": "38342882.139495868976566678826281",
+        "blockNumber": "15937667",
+        "hash": "0x04c43669c930a82f9f6fb31757c722e2c9cb4305eaa16baafce378aa1c09e98e",
+        "id": "0x04c43669c930a82f9f6fb31757c722e2c9cb4305eaa16baafce378aa1c09e98e1000000006000000",
+        "timestamp": "1668059735"
+      },
+      {
+        "amount": "30000000000000000000000000",
+        "amountUSD": "29932733.02152474596203285671482896",
+        "blockNumber": "16817996",
+        "hash": "0xc310a0affe2169d1f6feec1c63dbc7f7c62a887fa48795d327d4d2da2d6b111d",
+        "id": "0xc310a0affe2169d1f6feec1c63dbc7f7c62a887fa48795d327d4d2da2d6b111d3700000006000000",
+        "timestamp": "1678697459"
+      },
+      {
+        "amount": "17785000000000000000000000",
+        "amountUSD": "10536802.08457644928766999449880354",
+        "blockNumber": "17903042",
+        "hash": "0x9dd926678b0a75a9448a158fd5a3dba613f65372eb0f137e038f89ba8c891435",
+        "id": "0x9dd926678b0a75a9448a158fd5a3dba613f65372eb0f137e038f89ba8c8914353f02000006000000",
+        "timestamp": "1691894771"
+      },
+      {
+        "amount": "17510000000000000000000000",
+        "amountUSD": "17550472.16590467174269099446059612",
+        "blockNumber": "17620871",
+        "hash": "0xdd7dd68cd879d07cfc2cb74606baa2a5bf18df0e3bda9f6b43f904f4f7bbdfc1",
+        "id": "0xdd7dd68cd879d07cfc2cb74606baa2a5bf18df0e3bda9f6b43f904f4f7bbdfc17800000006000000",
+        "timestamp": "1688477447"
+      },
+      {
+        "amount": "13708154106140136718749954",
+        "amountUSD": "13702180.60459149942423018167739925",
+        "blockNumber": "13728544",
+        "hash": "0xd59e11e7e078332e145fd9981507e3286c5f6aedcda93469c6ae3af46f5cdfe6",
+        "id": "0xd59e11e7e078332e145fd9981507e3286c5f6aedcda93469c6ae3af46f5cdfe61b02000006000000",
+        "timestamp": "1638464665"
+      },
+      {
+        "amount": "7216185760498046874999928",
+        "amountUSD": "7255611.580116158337753218219719296",
+        "blockNumber": "13950121",
+        "hash": "0x28532551bd89fb15cc56941ed367596aeb63fabd492100d53b3896b7ad9d5ce5",
+        "id": "0x28532551bd89fb15cc56941ed367596aeb63fabd492100d53b3896b7ad9d5ce58200000006000000",
+        "timestamp": "1641448505"
+      }
+    ]
+  }
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Selected flashloans use cases}
+
+This chapters describes the different use cases of Flashloans included in the transactions presented in the listing \ref{lst:fl_topten_rsp}  
+
+\subsection{Flashloan for hacking a protocol}
+The transaction 0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad7 is the greatest flashloan ever issued. 
+ Etherscan and otterscan are the  tools to preform a preliminary analysis to understand what happened.
+ 
+ \begin{figure}[ht]
+    \centering % Center the image
+    \includegraphics[scale=0.5]{image/beanstalk/etherscan1.png}
+    \caption{etherscan overview of beanstalk hack}
+    \label{fig:beanstalk1}
+\end{figure}
+ 
+ The first observation about the figure \ref{lst:fl_topten_rsp}  is that the transaction has plenty of inner ones and the real flashloan is the sum of three inner transactions for a total of 1billion USD (the three stablecoins in the transactions are DAI,USDC,USDT, three very well known flavours of USD in the crypto space). 
+ 
+
+\subsection{Flashloan for collateral swap}
+
+\subsection{Flashloan for optimising transaction costs}
+
+\subsection{Flashloan call for MEV (pseudo arbitrage)}
+
+\subsection{Flashloan call for arbitrage (find a real arbitrage)}
+
+\newpage
 
 
 \section{LAST CHAPTER ENDING WITH NEW PAGE}
-\subsection{Blockchain explorer usage}
-\subsection{Analyse tx in blockchain explorers}
+\subsection{aaa}
+\subsection{Abbb}
 Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt  
-\subsection{Explorer selection}
-\subsection{Implikationen für Wissenschaft und Praxis}
-Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt 
+
 
 
 \newpage

@@ -198,7 +198,7 @@ By combining execution traces, event logs, and code analysis, you can gain a mor
 
 study in the graph
 {
-  flashloans(first: 5, orderBy: amount, orderDirection: desc) {
+  flashloans(first: 10, orderBy: amount, orderDirection: desc) {
     id
     amount
     timestamp

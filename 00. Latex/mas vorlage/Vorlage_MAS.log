@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.7)  11 DEC 2024 10:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.7)  14 JAN 2025 09:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -564,81 +564,108 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks33
 \@floatcapt=\box67
 )
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count298
+\lst@gtempboxa=\box68
+\lst@token=\toks34
+\lst@length=\count299
+\lst@currlwidth=\dimen196
+\lst@column=\count300
+\lst@pos=\count301
+\lst@lostspace=\dimen197
+\lst@width=\dimen198
+\lst@newlines=\count302
+\lst@lineno=\count303
+\lst@maxwidth=\dimen199
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/02/21 1.10 (Carsten Heinz)
+)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/02/21 1.10 (Carsten Heinz)
+\c@lstnumber=\count304
+\lst@skipnumbers=\count305
+\lst@framebox=\box69
+)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/02/21 1.10 listings configuration
+))
+Package: listings 2024/02/21 1.10 (Carsten Heinz)
 LaTeX Font Info:    Trying to load font information for OT1+txr on input line 5
-4.
+5.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count298
-\l__pdf_internal_box=\box68
+\l__color_backend_stack_int=\count306
+\l__pdf_internal_box=\box70
 )
 (./Vorlage_MAS.aux)
 \openout1 = `Vorlage_MAS.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 54.
+LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 55.
 LaTeX Font Info:    Trying to load font information for OML+txmi on input line 
-54.
+55.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 55.
 LaTeX Font Info:    Trying to load font information for OMS+txsy on input line 
-54.
+55.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 55.
 LaTeX Font Info:    Trying to load font information for OMX+txex on input line 
-54.
+55.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/omxtxex.fd
 File: omxtxex.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 55.
 LaTeX Font Info:    Trying to load font information for U+txexa on input line 5
-4.
+5.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/utxexa.fd
 File: utxexa.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 54.
-Package scrbase Info: activating english \abstractname on input line 54.
-Package scrbase Info: activating english \partname on input line 54.
-Package scrbase Info: activating english \figurename on input line 54.
-Package scrbase Info: activating english \tablename on input line 54.
-Package scrbase Info: activating english \contentsname on input line 54.
-Package scrbase Info: activating english \listfigurename on input line 54.
-Package scrbase Info: activating english \listtablename on input line 54.
-Package scrbase Info: activating english \refname on input line 54.
-Package scrbase Info: activating english \indexname on input line 54.
+LaTeX Font Info:    ... okay on input line 55.
+Package scrbase Info: activating english \abstractname on input line 55.
+Package scrbase Info: activating english \partname on input line 55.
+Package scrbase Info: activating english \figurename on input line 55.
+Package scrbase Info: activating english \tablename on input line 55.
+Package scrbase Info: activating english \contentsname on input line 55.
+Package scrbase Info: activating english \listfigurename on input line 55.
+Package scrbase Info: activating english \listtablename on input line 55.
+Package scrbase Info: activating english \refname on input line 55.
+Package scrbase Info: activating english \indexname on input line 55.
 
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count299
-\scratchdimen=\dimen196
-\scratchbox=\box69
-\nofMPsegments=\count300
-\nofMParguments=\count301
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count302
-\MPscratchDim=\dimen197
-\MPnumerator=\count303
-\makeMPintoPDFobject=\count304
-\everyMPtoPDFconversion=\toks35
+\scratchcounter=\count307
+\scratchdimen=\dimen256
+\scratchbox=\box71
+\nofMPsegments=\count308
+\nofMParguments=\count309
+\everyMPshowfont=\toks35
+\MPscratchCnt=\count310
+\MPscratchDim=\dimen257
+\MPnumerator=\count311
+\makeMPintoPDFobject=\count312
+\everyMPtoPDFconversion=\toks36
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -684,9 +711,13 @@ e
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count313
+Package tocbasic Info: setting babel extension for `lol' on input line 55.
+\scr@dte@lstlisting@maxnumwidth=\skip79
 LaTeX Font Info:    Font shape `OT1/txr/b/n' in size <20.74> not available
-(Font)              Font shape `OT1/txr/bx/n' tried instead on input line 64.
+(Font)              Font shape `OT1/txr/bx/n' tried instead on input line 65.
 Package epstopdf Info: Source file: <uzh_logo_d_pos.eps>
 (epstopdf)                    date: 2023-08-07 14:50:00
 (epstopdf)                    size: 509174 bytes
@@ -695,13 +726,13 @@ Package epstopdf Info: Source file: <uzh_logo_d_pos.eps>
 (epstopdf)                    size: 42426 bytes
 (epstopdf)             Command: <repstopdf --outfile=uzh_logo_d_pos-eps-convert
 ed-to.pdf uzh_logo_d_pos.eps>
-(epstopdf)             \includegraphics on input line 88.
+(epstopdf)             \includegraphics on input line 89.
 Package epstopdf Info: Output file is already uptodate.
 <uzh_logo_d_pos-eps-converted-to.pdf, id=1, 142.5325pt x 49.18375pt>
 File: uzh_logo_d_pos-eps-converted-to.pdf Graphic file (type pdf)
 <use uzh_logo_d_pos-eps-converted-to.pdf>
 Package pdftex.def Info: uzh_logo_d_pos-eps-converted-to.pdf  used on input lin
-e 88.
+e 89.
 (pdftex.def)             Requested size: 128.0374pt x 44.18164pt.
 [1
 
@@ -709,173 +740,325 @@ e 88.
 al/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc} <./uzh_logo_d_pos-eps-c
 onverted-to.pdf>]
 LaTeX Font Info:    Trying to load font information for OT1+txss on input line 
-111.
+112.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/ot1txss.fd
 File: ot1txss.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
-(Font)              scaled to size 10.40245pt on input line 111.
+(Font)              scaled to size 10.40245pt on input line 112.
 LaTeX Font Info:    Font shape `OT1/txss/b/n' will be
-(Font)              scaled to size 10.40245pt on input line 111.
+(Font)              scaled to size 10.40245pt on input line 112.
 LaTeX Font Info:    Font shape `OT1/txss/b/n' will be
-(Font)              scaled to size 13.67995pt on input line 111.
+(Font)              scaled to size 13.67995pt on input line 112.
 LaTeX Font Info:    Trying to load font information for U+txsya on input line 1
-15.
+16.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/utxsya.fd
 File: utxsya.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Trying to load font information for U+txsyb on input line 1
-15.
+16.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/utxsyb.fd
 File: utxsyb.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Trying to load font information for U+txmia on input line 1
-15.
+16.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/utxmia.fd
 File: utxmia.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Trying to load font information for U+txsyc on input line 1
-15.
+16.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/utxsyc.fd
 File: utxsyc.fd 2000/12/15 v3.1
 ) [1]
-(./Vorlage_MAS.toc)
+(./Vorlage_MAS.toc [2])
 \tf@toc=\write3
 \openout3 = `Vorlage_MAS.toc'.
 
- [2] (./Vorlage_MAS.lof)
+ [3] (./Vorlage_MAS.lof)
 \tf@lof=\write4
 \openout4 = `Vorlage_MAS.lof'.
 
- [3] (./Vorlage_MAS.lot)
+ [4] (./Vorlage_MAS.lot)
 \tf@lot=\write5
 \openout5 = `Vorlage_MAS.lot'.
 
- [4]
-[5]
+
+[5] [6]
 LaTeX Font Info:    Font shape `OT1/txss/b/n' will be
-(Font)              scaled to size 11.39996pt on input line 140.
-<image/otclendborrow.png, id=33, 3854.4pt x 717.68124pt>
+(Font)              scaled to size 11.39996pt on input line 141.
+ [1]
+<image/otclendborrow.png, id=40, 3854.4pt x 717.68124pt>
 File: image/otclendborrow.png Graphic file (type png)
 <use image/otclendborrow.png>
-Package pdftex.def Info: image/otclendborrow.png  used on input line 152.
+Package pdftex.def Info: image/otclendborrow.png  used on input line 155.
 (pdftex.def)             Requested size: 192.0548pt x 35.75475pt.
-<image/lenderborrowerOTC.png, id=35, 3854.4pt x 1720.4275pt>
+<image/lenderborrowerOTC.png, id=42, 3854.4pt x 1720.4275pt>
 File: image/lenderborrowerOTC.png Graphic file (type png)
 <use image/lenderborrowerOTC.png>
-Package pdftex.def Info: image/lenderborrowerOTC.png  used on input line 159.
+Package pdftex.def Info: image/lenderborrowerOTC.png  used on input line 162.
 (pdftex.def)             Requested size: 192.0548pt x 85.7114pt.
 
-Underfull \hbox (badness 3396) in paragraph at lines 160--160
+Underfull \hbox (badness 3396) in paragraph at lines 163--163
 [][][]|\OT1/txr/m/n/10.95 smart con-tract han-dling lender
  []
 
-<image/otcrepayment.png, id=36, 3854.4pt x 3357.54375pt>
+<image/otcrepayment.png, id=43, 3854.4pt x 3357.54375pt>
 File: image/otcrepayment.png Graphic file (type png)
 <use image/otcrepayment.png>
-Package pdftex.def Info: image/otcrepayment.png  used on input line 173.
+Package pdftex.def Info: image/otcrepayment.png  used on input line 176.
 (pdftex.def)             Requested size: 226.19888pt x 197.03798pt.
-<image/otcfailtopay.png, id=37, 2507.3675pt x 3854.4pt>
+<image/otcfailtopay.png, id=44, 2507.3675pt x 3854.4pt>
 File: image/otcfailtopay.png Graphic file (type png)
 <use image/otcfailtopay.png>
-Package pdftex.def Info: image/otcfailtopay.png  used on input line 180.
+Package pdftex.def Info: image/otcfailtopay.png  used on input line 183.
 (pdftex.def)             Requested size: 128.0387pt x 196.78941pt.
 
-Underfull \hbox (badness 3769) in paragraph at lines 181--181
+Underfull \hbox (badness 3769) in paragraph at lines 184--184
 [][][]|\OT1/txr/m/n/10.95 Bor-rower fails to
  []
 
-[1 <./image/otclendborrow.png> <./image/lenderborrowerOTC.png>]
-<image/lenderborrower.png, id=44, 3854.4pt x 492.84125pt>
+<image/lenderborrower.png, id=45, 3854.4pt x 492.84125pt>
 File: image/lenderborrower.png Graphic file (type png)
 <use image/lenderborrower.png>
-Package pdftex.def Info: image/lenderborrower.png  used on input line 193.
+Package pdftex.def Info: image/lenderborrower.png  used on input line 196.
 (pdftex.def)             Requested size: 298.75264pt x 38.1948pt.
+[2 <./image/otclendborrow.png> <./image/lenderborrowerOTC.png>]
 LaTeX Font Info:    Font shape `OT1/txr/b/n' in size <10.95> not available
-(Font)              Font shape `OT1/txr/bx/n' tried instead on input line 202.
- [2 <./image/otcrepayment.png> <./image/otcfailtopay.png> <./image/lenderborrow
-er.png>]
+(Font)              Font shape `OT1/txr/bx/n' tried instead on input line 205.
 <image/etherscanLPool.png, id=52, 1384.17125pt x 784.9325pt>
 File: image/etherscanLPool.png Graphic file (type png)
 <use image/etherscanLPool.png>
-Package pdftex.def Info: image/etherscanLPool.png  used on input line 235.
+Package pdftex.def Info: image/etherscanLPool.png  used on input line 239.
 (pdftex.def)             Requested size: 426.79135pt x 242.02106pt.
-
-[3 <./image/etherscanLPool.png>]
+ [3 <./image/otcrepayment.png> <./image/otcfailtopay.png> <./image/lenderborrow
+er.png>]
 LaTeX Font Info:    Trying to load font information for OT1+txtt on input line 
-262.
+263.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/txfonts/ot1txtt.fd
 File: ot1txtt.fd 2000/12/15 v3.1
-)
-<image/flashloan.png, id=58, 1168.365pt x 274.02374pt>
+) [4 <./image/etherscanLPool.png>]
+<image/flashloan.png, id=64, 1168.365pt x 274.02374pt>
 File: image/flashloan.png Graphic file (type png)
 <use image/flashloan.png>
-Package pdftex.def Info: image/flashloan.png  used on input line 271.
+Package pdftex.def Info: image/flashloan.png  used on input line 274.
 (pdftex.def)             Requested size: 426.79135pt x 100.09937pt.
- [4 <./image/flashloan.png>]
-<image/simpleethnodes.png, id=64, 3854.4pt x 706.64pt>
+<image/requestFlashloan.png, id=65, 766.865pt x 35.13126pt>
+File: image/requestFlashloan.png Graphic file (type png)
+<use image/requestFlashloan.png>
+Package pdftex.def Info: image/requestFlashloan.png  used on input line 282.
+(pdftex.def)             Requested size: 426.79135pt x 19.5522pt.
+<image/repayFlashloan.png, id=66, 790.955pt x 66.2475pt>
+File: image/repayFlashloan.png Graphic file (type png)
+<use image/repayFlashloan.png>
+Package pdftex.def Info: image/repayFlashloan.png  used on input line 288.
+(pdftex.def)             Requested size: 426.79135pt x 35.74683pt.
+ [5 <./image/flashloan.png> <./image/requestFlashloan.png>]
+[6 <./image/repayFlashloan.png>]
+<image/simpleethnodes.png, id=78, 3854.4pt x 706.64pt>
 File: image/simpleethnodes.png Graphic file (type png)
 <use image/simpleethnodes.png>
-Package pdftex.def Info: image/simpleethnodes.png  used on input line 308.
+Package pdftex.def Info: image/simpleethnodes.png  used on input line 325.
 (pdftex.def)             Requested size: 298.75264pt x 54.76402pt.
- [5] [6 <./image/simpleethnodes.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 350--350
+ [7 <./image/simpleethnodes.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 []|\OT1/txr/m/n/10.95 Dependency on Alchemy
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 350--350
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 []|\OT1/txr/m/n/10.95 Full de-cen-tral-iza-tion and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 350--350
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 []|\OT1/txr/m/n/10.95 Developer-focused tools
  []
 
-[7]
-<image/powpos.png, id=76, 1003.75pt x 428.60126pt>
+[8] [9]
+<image/powpos.png, id=90, 1003.75pt x 428.60126pt>
 File: image/powpos.png Graphic file (type png)
 <use image/powpos.png>
-Package pdftex.def Info: image/powpos.png  used on input line 396.
+Package pdftex.def Info: image/powpos.png  used on input line 412.
 (pdftex.def)             Requested size: 298.75264pt x 127.56767pt.
- [8] [9 <./image/powpos.png>] [10] [11] [12] [13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 464--466
+ [10 <./image/powpos.png>] [11] [12]
+Underfull \hbox (badness 1237) in paragraph at lines 472--472
+[]|\OT1/txr/m/n/10.95 MySQL, Post-greSQL, Or-a-
+ []
+
+<image/explorers/uniswapLPetherscan.png, id=102, 1385.175pt x 623.32875pt>
+File: image/explorers/uniswapLPetherscan.png Graphic file (type png)
+<use image/explorers/uniswapLPetherscan.png>
+Package pdftex.def Info: image/explorers/uniswapLPetherscan.png  used on input 
+line 488.
+(pdftex.def)             Requested size: 426.79135pt x 192.05052pt.
+[13]
+<image/explorers/transaction_swap.png, id=106, 1372.12625pt x 559.08875pt>
+File: image/explorers/transaction_swap.png Graphic file (type png)
+<use image/explorers/transaction_swap.png>
+Package pdftex.def Info: image/explorers/transaction_swap.png  used on input li
+ne 504.
+(pdftex.def)             Requested size: 426.79135pt x 173.90436pt.
+<image/explorers/swapLogs.png, id=107, 1255.69125pt x 423.5825pt>
+File: image/explorers/swapLogs.png Graphic file (type png)
+<use image/explorers/swapLogs.png>
+Package pdftex.def Info: image/explorers/swapLogs.png  used on input line 522.
+(pdftex.def)             Requested size: 426.79135pt x 143.96443pt.
+ [14 <./image/explorers/uniswapLPetherscan.png>] [15 <./image/explorers/transac
+tion_swap.png> <./image/explorers/swapLogs.png>] [16] [17] [18] [19]
+Overfull \hbox (6.98105pt too wide) in paragraph at lines 679--680
+\OT1/txr/m/n/10.95 The Graph po-si-tion it-self as the google of the blockchain
+s as it al-lows to ef-fi-ciently ac-cess blockchain
+ []
+
+<image/thegraph/positioning.png, id=130, 289.08pt x 281.05pt>
+File: image/thegraph/positioning.png Graphic file (type png)
+<use image/thegraph/positioning.png>
+Package pdftex.def Info: image/thegraph/positioning.png  used on input line 683
+.
+(pdftex.def)             Requested size: 144.53964pt x 140.52464pt.
+[20]
+<image/thegraph/process.png, id=134, 3854.4pt x 3268.21pt>
+File: image/thegraph/process.png Graphic file (type png)
+<use image/thegraph/process.png>
+Package pdftex.def Info: image/thegraph/process.png  used on input line 699.
+(pdftex.def)             Requested size: 426.79135pt x 361.84805pt.
+ [21 <./image/thegraph/positioning.png>]
+LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 740.
+LaTeX Font Info:    Font shape `OT1/txr/b/n' in size <8.5> not available
+(Font)              Font shape `OT1/txr/bx/n' tried instead on input line 740.
+ [22 <./image/thegraph/process.png>]
+LaTeX Font Info:    Font shape `OT1/txr/b/it' in size <10.95> not available
+(Font)              Font shape `OT1/txr/bx/it' tried instead on input line 749.
+
+ [23] (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/02/21 1.10 listings language file
+)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/02/21 1.10 listings language file
+)
+LaTeX Font Info:    Font shape `OT1/txtt/m/it' in size <8> not available
+(Font)              Font shape `OT1/txtt/m/sl' tried instead on input line 774.
+
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/02/21 1.10 listings language file
+)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/02/21 1.10 (Carsten Heinz)
+) [24]
+[25] [26]
+Underfull \hbox (badness 10000) in paragraph at lines 894--896
 
  []
 
-[15] (./Vorlage_MAS.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 899--900
+[]\OT1/txtt/m/n/10.95 https://thegraph.com/explorer/subgraphs/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 899--900
+\OT1/txtt/m/n/10.95 C2zniPn45RnLDGzVeGZCx2Sw3GXrbc9gL4ZfL8B8Em2j?
+ []
+
+<image/process/messari.png, id=158, 1344.02126pt x 674.52pt>
+File: image/process/messari.png Graphic file (type png)
+<use image/process/messari.png>
+Package pdftex.def Info: image/process/messari.png  used on input line 903.
+(pdftex.def)             Requested size: 426.79135pt x 214.19374pt.
+[27] [28 <./image/process/messari.png>]
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 962--963
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 970--971
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 978--979
+[][][][][][][][][][][][][] 
+ []
+
+[29]
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 986--987
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 994--995
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 1002--1003
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 1010--1011
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 1018--1019
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 1026--1027
+[][][][][][][][][][][][][] 
+ []
+
+[30]
+Overfull \hbox (48.41348pt too wide) in paragraph at lines 1034--1035
+[][][][][][][][][][][][][] 
+ []
+
+[31] [32] [33] [34]
+Underfull \hbox (badness 10000) in paragraph at lines 1074--1076
+
+ []
+
+[35] (./Vorlage_MAS.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 12430 strings out of 474116
- 254206 string characters out of 5743682
- 1947187 words of memory out of 5000000
- 34578 multiletter control sequences out of 15000+600000
- 590253 words of font info for 103 fonts, out of 8000000 for 9000
+ 14382 strings out of 474116
+ 282333 string characters out of 5743682
+ 2075187 words of memory out of 5000000
+ 36501 multiletter control sequences out of 15000+600000
+ 606262 words of font info for 144 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,20n,107p,10906b,487s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,20n,107p,10906b,1982s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></us
 r/local/texlive/2024/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/local
 /texlive/2024/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/local/texliv
 e/2024/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/
-texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2024/texmf-d
-ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/
-type1/urw/times/utmr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on Vorlage_MAS.pdf (21 pages, 2020896 bytes).
+texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/local/texlive/2024/texmf-d
+ist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2024/texmf-dist/fon
+ts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/u
+rw/times/utmbi8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/times/
+utmr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/times/utmri8a.pf
+b>
+Output written on Vorlage_MAS.pdf (42 pages, 3559661 bytes).
 PDF statistics:
- 140 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 235 PDF objects out of 1000 (max. 8388607)
+ 132 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
