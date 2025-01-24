@@ -1,16 +1,22 @@
 \babel@toc {english}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Comparison Between ethLend and Traditional Finance}}{3}{}%
-\contentsline {table}{\numberline {2}{\ignorespaces Comparison Between Aave V2 and Traditional Finance}}{4}{}%
-\contentsline {table}{\numberline {3}{\ignorespaces LendingPool Aave V2 Contract Methods}}{5}{}%
-\contentsline {table}{\numberline {4}{\ignorespaces Comparison Between Flashloans and Databases}}{6}{}%
-\contentsline {table}{\numberline {5}{\ignorespaces Main characteristic Alchemy and Infura}}{8}{}%
-\contentsline {table}{\numberline {6}{\ignorespaces Main characteristic Infura, Alchemy, and Self-Hosting a Node}}{8}{}%
-\contentsline {table}{\numberline {7}{\ignorespaces Resource Requirements for Ethereum Clients}}{9}{}%
-\contentsline {table}{\numberline {8}{\ignorespaces Erigon Advantages for Data Analysis}}{11}{}%
-\contentsline {table}{\numberline {9}{\ignorespaces Database Types, Implementations, and Usage}}{13}{}%
-\contentsline {table}{\numberline {10}{\ignorespaces Comparison of Raw Data and Explorer Features}}{16}{}%
-\contentsline {table}{\numberline {11}{\ignorespaces Comparison of Indexing in Computer Science and The Graph Protocol}}{19}{}%
-\contentsline {table}{\numberline {12}{\ignorespaces Schematic Comparison: Erigon vs. The Graph Protocol}}{20}{}%
-\contentsline {table}{\numberline {13}{\ignorespaces Summary: Leveraging The Graph for Aave V2 Flashloan Analysis}}{23}{}%
-\contentsline {table}{\numberline {14}{\ignorespaces Schematic Summary of Subgraph Workflow in The Graph}}{24}{}%
+\contentsline {table}{\numberline {1}{\ignorespaces Comparison Between ethLend and Traditional Finance}}{3}{table.caption.10}%
+\contentsline {table}{\numberline {2}{\ignorespaces Comparison Between Aave V2 and Traditional Finance}}{4}{table.caption.11}%
+\contentsline {table}{\numberline {3}{\ignorespaces LendingPool Aave V2 Contract Methods}}{5}{table.caption.13}%
+\contentsline {table}{\numberline {4}{\ignorespaces Comparison Between Flashloans and Databases}}{6}{table.caption.17}%
+\contentsline {table}{\numberline {5}{\ignorespaces Main characteristic Alchemy and Infura}}{8}{table.caption.19}%
+\contentsline {table}{\numberline {6}{\ignorespaces Main characteristic Infura, Alchemy, and Self-Hosting a Node}}{8}{table.caption.20}%
+\contentsline {table}{\numberline {7}{\ignorespaces Resource Requirements for Ethereum Clients}}{9}{table.caption.21}%
+\contentsline {table}{\numberline {8}{\ignorespaces Erigon Advantages for Data Analysis}}{11}{table.caption.23}%
+\contentsline {table}{\numberline {9}{\ignorespaces Database Types, Implementations, and Usage}}{13}{table.caption.24}%
+\contentsline {table}{\numberline {10}{\ignorespaces Comparison of Raw Data and Explorer Features}}{16}{table.caption.30}%
+\contentsline {table}{\numberline {11}{\ignorespaces Comparison of Indexing in Computer Science and The Graph Protocol}}{19}{table.caption.31}%
+\contentsline {table}{\numberline {12}{\ignorespaces Schematic Comparison: Erigon vs. The Graph Protocol}}{20}{table.caption.32}%
+\contentsline {table}{\numberline {13}{\ignorespaces Summary: Leveraging The Graph for Aave V2 Flashloan Analysis}}{23}{table.caption.35}%
+\contentsline {table}{\numberline {14}{\ignorespaces Schematic Summary of Subgraph Workflow in The Graph}}{24}{table.caption.36}%
+\contentsline {table}{\numberline {15}{\ignorespaces Hack Execution}}{33}{table.caption.39}%
+\contentsline {table}{\numberline {16}{\ignorespaces Hack Preparation}}{33}{table.caption.40}%
+\contentsline {table}{\numberline {17}{\ignorespaces Washing}}{33}{table.caption.41}%
+\contentsline {table}{\numberline {18}{\ignorespaces Mitigation Strategies for Flashloan Attacks}}{37}{table.caption.46}%
+\contentsline {table}{\numberline {19}{\ignorespaces DSProxy Functionality Summary}}{39}{table.caption.48}%
+\contentsline {table}{\numberline {20}{\ignorespaces Summary of Flashloan Caller Actions and Analysis}}{41}{table.caption.53}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

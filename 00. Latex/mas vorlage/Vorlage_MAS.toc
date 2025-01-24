@@ -1,44 +1,40 @@
 \babel@toc {english}{}\relax 
-\contentsline {section}{\numberline {1}Einleitung }{1}{}%
-\contentsline {subsection}{\numberline {1.1}Ausgangslage und Problemstellung}{1}{}%
-\contentsline {subsection}{\numberline {1.2}Ziel der Arbeit}{1}{}%
-\contentsline {subsection}{\numberline {1.3}Aufbau und Vorgehen}{1}{}%
-\contentsline {subsection}{\numberline {1.4}Abgrenzungen}{1}{}%
-\contentsline {section}{\numberline {2}Aave protocol}{2}{}%
-\contentsline {subsection}{\numberline {2.1}Aave lending protocol basics}{2}{}%
-\contentsline {subsection}{\numberline {2.2}Aave Lending pool contract}{4}{}%
-\contentsline {subsection}{\numberline {2.3}Flashloans}{5}{}%
-\contentsline {section}{\numberline {3}Self hosted Ethereum node}{7}{}%
-\contentsline {subsection}{\numberline {3.1}Introduction}{7}{}%
-\contentsline {subsection}{\numberline {3.2}Self hosted node vs provider}{7}{}%
-\contentsline {subsection}{\numberline {3.3}Comparison of full nodes vs archive nodes in various ethereum implementations}{9}{}%
-\contentsline {subsection}{\numberline {3.4}Motivation for choosing Erigon}{9}{}%
-\contentsline {section}{\numberline {4}Blockchain explorers}{12}{}%
-\contentsline {subsection}{\numberline {4.1}Introduction}{12}{}%
-\contentsline {subsection}{\numberline {4.2}Blockchain explorer usage}{13}{}%
-\contentsline {subsection}{\numberline {4.3}Analyse transactions in blockchain explorers}{14}{}%
-\contentsline {subsection}{\numberline {4.4}Explorer selection}{17}{}%
-\contentsline {section}{\numberline {5}The Graph protocol}{19}{}%
-\contentsline {subsection}{\numberline {5.1}Introduction}{19}{}%
-\contentsline {subsection}{\numberline {5.2}Need of indexing the blockchain}{19}{}%
-\contentsline {subsection}{\numberline {5.3}Positioning of The Graph. Overview}{20}{}%
-\contentsline {subsection}{\numberline {5.4}How The Graph works}{20}{}%
-\contentsline {subsection}{\numberline {5.5}Usage of The Graph}{21}{}%
-\contentsline {subsection}{\numberline {5.6}The Graph: technical view}{23}{}%
-\contentsline {section}{\numberline {6}Data analysis process}{27}{}%
-\contentsline {subsection}{\numberline {6.1}Introduction}{27}{}%
-\contentsline {subsection}{\numberline {6.2}How the tools are used together}{27}{}%
-\contentsline {subsection}{\numberline {6.3}Example of querying Aave 2 in The Graph and analysis of the result}{27}{}%
-\contentsline {subsection}{\numberline {6.4}Reference query}{29}{}%
-\contentsline {section}{\numberline {7}Use case: flashloan for hacking a protocol}{32}{}%
-\contentsline {subsection}{\numberline {7.1}Use case: flashloan for hacking a protocol}{32}{}%
-\contentsline {subsection}{\numberline {7.2}Use case: flashloan for collateral swap}{32}{}%
-\contentsline {subsection}{\numberline {7.3}Use case: flashloan for optimising transaction costs}{32}{}%
-\contentsline {subsection}{\numberline {7.4}Use case: flashloan call for MEV (pseudo arbitrage)}{32}{}%
-\contentsline {subsection}{\numberline {7.5}Use case: flashloan call for arbitrage (find a real arbitrage)}{32}{}%
-\contentsline {section}{\numberline {8}LAST CHAPTER ENDING WITH NEW PAGE}{33}{}%
-\contentsline {subsection}{\numberline {8.1}aaa}{33}{}%
-\contentsline {subsection}{\numberline {8.2}Abbb}{33}{}%
-\contentsline {section}{\numberline {9}Literaturverzeichnis}{34}{}%
-\contentsline {section}{\numberline {10}Anhang}{35}{}%
+\contentsline {section}{\numberline {1}Einleitung }{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Ausgangslage und Problemstellung}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Ziel der Arbeit}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Aufbau und Vorgehen}{1}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Abgrenzungen}{1}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Aave protocol}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Aave lending protocol basics}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Aave Lending pool contract}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Flashloans}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Self hosted Ethereum node}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Introduction}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Self hosted node vs provider}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Comparison of full nodes vs archive nodes in various ethereum implementations}{9}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Motivation for choosing Erigon}{9}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Blockchain explorers}{12}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Introduction}{12}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Blockchain explorer usage}{13}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Analyse transactions in blockchain explorers}{14}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Explorer selection}{17}{subsection.4.4}%
+\contentsline {section}{\numberline {5}The Graph protocol}{19}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Introduction}{19}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Need of indexing the blockchain}{19}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Positioning of The Graph. Overview}{20}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}How The Graph works}{20}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Usage of The Graph}{21}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}The Graph: technical view}{23}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Data analysis process}{27}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Introduction}{27}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Analysis Tools}{27}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Transaction list}{27}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Selected flashloans use cases}{32}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Beanstalk protocol hack}{32}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Flashloan for pseudo arbitrage on incentives}{37}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Flashloan for obfuscating a transaction}{40}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Flashloan call for MEV (front running trades)}{41}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Flashloan call for arbitrage (find a real arbitrage)}{41}{subsection.7.5}%
+\contentsline {section}{\numberline {8}Literaturverzeichnis}{42}{section.8}%
+\contentsline {section}{\numberline {9}Anhang}{43}{section.9}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

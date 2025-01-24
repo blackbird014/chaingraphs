@@ -36,6 +36,10 @@
 \usepackage{placeins} %added by me Include this for \FloatBarrier
 \usepackage{float} % Added by me to 'fix' tables
 \usepackage{listings}% Added by me to render formatting
+
+
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref} % Include this in the preamble for \url{}. must be after all the usepackage
+
 %\usepackage{hyperref} %
 
 
@@ -947,7 +951,6 @@ For the purpose of this paper the following query has allowed to extract all the
 \end{lstlisting}
 
 
-
 \begin{lstlisting}[language=xml, caption={ JSON response for top 10 usd amount flashloans}, label={lst:fl_topten_rsp}, basicstyle=\ttfamily\scriptsize]
 {
   "data": {
@@ -1043,39 +1046,315 @@ For the purpose of this paper the following query has allowed to extract all the
 
 This chapters describes the different use cases of Flashloans included in the transactions presented in the listing \ref{lst:fl_topten_rsp}  
 
-\subsection{Flashloan for hacking a protocol}
-The transaction 0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad7 is the greatest flashloan ever issued. 
+\subsection{Beanstalk protocol hack}
+
+The transaction 0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad7 is the greatest flashloan ever issued. It was used for hacking Beanstalk a decentralised protocol.
+The transaction 0xc310a0affe2169d1f6feec1c63dbc7f7c62a887fa48795d327d4d2da2d6b111d included in the list is also a protocol hack (Euler protocol). This  paragraph focuses on the beanstalk hack as an example of protocol hack.
+
  Etherscan and otterscan are the  tools to preform a preliminary analysis to understand what happened.
  
- \begin{figure}[ht]
-    \centering % Center the image
-    \includegraphics[scale=0.5]{image/beanstalk/etherscan1.png}
-    \caption{etherscan overview of beanstalk hack}
+\begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/beanstalk/etherscan1.png}
+    \caption{ Overview of Beanstalk hack.}
     \label{fig:beanstalk1}
 \end{figure}
  
- The first observation about the figure \ref{lst:fl_topten_rsp}  is that the transaction has plenty of inner ones and the real flashloan is the sum of three inner transactions for a total of 1billion USD (the three stablecoins in the transactions are DAI,USDC,USDT, three very well known flavours of USD in the crypto space). 
+ The first observation about the figure \ref{fig:beanstalk1}  is that the transaction has plenty of inner ones, close to 200 which are not displayed for practical reasons, and the real flashloan is the sum of three inner transactions, the top three in the figure,  for a total of 1billion USD (the three stablecoins in the transactions are DAI, USDC, USDT, three very well known flavours of USD in the crypto space). This shows that, from one side using The Graph was very useful to filter out a set of transactions among thousands of flashloans issued, but a full analysis cannot be done just from those data: The Graph subgraph was not designed to consolidate the three inner transactions of the flashloan strongly underestimating the size of the borrowed amount itself. The complexity of the inner transactions is so great that its comprehension has required  to read them in detail.  The tables \ref{tab:beanstalk1}, \ref{tab:beanstalk2} and \ref{tab:beanstalk3} summarise, from a functional point of view, what happened dividing the process in the hack execution, which is the part of the attack directly using the flashloan, including its repayment, the planning of the hack, which consist on a set of transactions done previously after a phase in which beanstalk has been studied in detail by the hacker and  the trade washing, where the hacker, using mixers made impossible to trace the funds he diverted. Mixers, known also as tumblers, are a technology widely used  to obfuscate the orgin and destination of cryptocurrency transactions;  the most famous, tornado cash, is running in the ethereum blockchain and is a decentralised protocols itself.
  
+ 
+ 
+\begin{table}[H]
+\centering
+\caption{Hack Execution}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Action} & \textbf{Details} \\ \hline
+\textbf{Initiated flashloan} & Borrowed \$1 billion from Aave to temporarily acquire governance control. \\ \hline
+\textbf{Purchased majority BEAN tokens} & Used flashloan funds to buy enough BEAN tokens for a governance majority. \\ \hline
+\textbf{Passed and executed proposal} & Drained funds from treasury to attacker-controlled wallets. \\ \hline
+\textbf{Repaid flashloan} & Used part of the stolen funds to repay the flashloan within the same transaction. \\ \hline
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table summarises the execution phase of the Beanstalk exploit, including the flashloan and proposal execution.}
+\label{tab:beanstalk1}
+\end{table}
 
-\subsection{Flashloan for collateral swap}
 
-\subsection{Flashloan for optimising transaction costs}
+\begin{table}[H]
+\centering
+\caption{Hack Preparation}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Action} & \textbf{Details} \\ \hline
+\textbf{Deployed malicious proposal} & Submitted a proposal with hidden malicious code to drain funds. \\ \hline
+\textbf{Monitored liquidity} & Ensured sufficient BEAN and Aave liquidity for flashloan and execution. \\ \hline
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table summarizes the preparation steps for executing the Beanstalk exploit.}
+\label{tab:beanstalk2}
+\end{table}
+ 
+ 
+\begin{table}[H]
+\centering
+\caption{Washing}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Action} & \textbf{Details} \\ \hline
+\textbf{Split stolen funds across wallets} & Distributed the stolen funds across multiple wallets to obfuscate the trail. \\ \hline
+\textbf{Utilized mixers and DeFi protocols} & Employed services like Tornado Cash and DeFi platforms to anonymize stolen funds further. \\ \hline
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table summarizes the washing phase, where stolen funds were distributed and anonymized.}
+\label{tab:beanstalk3}
+\end{table}
+ 
+Observing through the inner transactions it is possible to identify, the borrowed money and the interest and principal repayments. This is expected as such inner transactions should always happen or the full transaction would be reverted and not committed to the ethereum. Analysing each of the other transactions is too much detail and the criterion chosen is to explain the main steps of the hack. 
 
-\subsection{Flashloan call for MEV (pseudo arbitrage)}
+
+The  complexity of this particular flashloan is  to understand how beanstalk worked at the time of the hack and how the hacker prepared the terrain for the successful usage of a flashloan.
+
+
+The hacker wallet 0x1c5dcdd006ea78a7e4783f9e6021c32935a10fb4 is the flashloan transactions initializer. Studying it the hack preparation becomes clear. At first the wallet is financed as showed in fig  \ref{fig:beanstalk2} and  \ref{fig:beanstalk3}.
+\begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/beanstalk/etherscan_fin_wallet.png}
+    \caption{Overview of hacker wallet financing through synapse}
+    \label{fig:beanstalk2}
+\end{figure}
+
+
+\begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/beanstalk/hackerfinancingWallet.png}
+    \caption{Overview of Synapse and other tools preloaded }
+    \caption*{\footnotesize \textit{Source: \url{https://medium.com/@nvy_0x/the-beanstalk-bean-exploit-b038f4d324ea}}}
+    \label{fig:beanstalk3}
+\end{figure}
+
+
+
+
+
+The hacker knows very deeply the protocol governance, including its flaws and how to write sophisticated smart contracts by leveraging well tested libraries to use hidden features of the EVM.
+In the specific case: Beanstalk is a DAO with a governance which is based on majority vote. Such vote can be exercised by staking BEAN tokens or staking LP (liquidity pools). A security implementation of the protocols happens to become the exploitetd flaw: to defend the DAO from hacks, the protocol allows to trigger emergency proposal with the 2/3rds of voting power by allowing the the approval of a proposal with just 24 hours delay from its presentation by triggering a code called emergencyCommit().
+
+
+
+ Obviously the protocol implementors always check if a proposal is malicious by processing it in advance and it looks reasonable that nobody will perform an attack out of nowhere in an ethereum transaction.
+ 
+ 
+ \begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/beanstalk/maliciousProposalExecution.png}
+    \caption{malicious proposal execution.}
+    \label{fig:proposalexec}
+\end{figure}
+ 
+ \begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/beanstalk/divertingfunds}
+    \caption{diverting funds.}
+    \label{fig:divfunds}
+\end{figure}
+
+ 
+ 
+ The idea is that a proposal is  submitted and voted at large majority if the protocol looks under attack. Here comes the smart hacker with the second step in the hack preparation: two proposals are submitted 1 day (24 hours) before the flashloan appearently not correlated. In reality one,classified as a proposal to donate fund to Ukraine, allows a smart contract to be deployed to a precomputed address: reverse engineering the code in such address, which is available on chain, it is clear that the address contains a malicious code, which exploiting a bug in the beanstalk protocol executed the emergencyCommit() and  sends all the treasury reasources to itself. The second contract created by the hacker is very likely a kind of spam to obfuscate the malicious one: it is not directly involved in the process.
+ The triggering of the malicious proposal is rendered in figure \ref{fig:proposalexec}
+
+
+
+With all these steps in place the hacker, during the flashloan has only to reach the 2/3rd majority by adding the missing voting power which he buys with the borrowed money, then trigger the call to the malicious contract which will clear all the funds sending them to his wallet.
+This wallet 0x1c5dcdd006ea78a7e4783f9e6021c32935a10fb4 sends afterwards hundreds of transaction of 100 ethers to mixers washing the money which is delivered to many unknown and hardly identifiable addresses.
+The fund diversion is rendered in the figure \ref{fig:divfunds}
+
+
+
+
+
+
+The described hack is one of the biggest ever happened. Differently from many, for example the Euler protocol hack, also performed through an Aave V2 flashloan, the distracted funds have never been returned.
+After this experience governance protocols have included a delay time between the call and  execution of a protocol smart contract as a protection against malicious usage of flashloans.
+The measures generally suggested to avoid a DAO hack are summarised in the table \ref{tab:flashloan_mitigation}
+
+\begin{table}[H]
+\centering
+\caption{Mitigation Strategies for Flashloan Attacks}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|p{0.8\textwidth}|}
+\hline
+\textbf{Strategy} & \textbf{Description} \\ \hline
+
+\textbf{Time-weighted Governance} & 
+Require governance votes to be based on token holdings over time, reducing the ability of attackers to temporarily acquire voting power through flashloans. \\ \hline
+
+\textbf{Proposal Review Period} & 
+Introduce a delay between proposal submission and execution to allow the community to detect and address malicious proposals. \\ \hline
+
+\textbf{Governance Token Staking} & 
+Mandate staking of governance tokens for a fixed period before they can be used for voting, preventing instant use of flashloan-acquired tokens. \\ \hline
+
+\textbf{Flashloan-resistant Logic} & 
+Implement transaction logic that ignores changes in token balances occurring within a single block to invalidate flashloan-based manipulations. \\ \hline
+
+\textbf{Limits on Single Transactions} & 
+Enforce limits on the maximum amount of funds or tokens that can be moved in a single transaction to minimize the damage from exploitative actions. \\ \hline
+
+\textbf{Decentralized Audits} & 
+Regularly conduct audits and simulations to test for vulnerabilities, including governance-related exploits and flashloan attacks. \\ \hline
+
+\textbf{Oracle Manipulation Defense} & 
+Use robust and decentralized oracles to prevent attackers from influencing on-chain price feeds during flashloan attacks. \\ \hline
+
+\textbf{Risk Flagging Systems} & 
+Deploy automated monitoring tools to detect unusual transactions or flashloan patterns, triggering alerts for further investigation. \\ \hline
+
+\textbf{Community-driven Governance} & 
+Empower diverse stakeholders in governance, reducing the influence of temporary, centralized token holdings acquired through flashloans. \\ \hline
+
+\textbf{Hard-coded Safety Mechanisms} & 
+Embed hard limits on treasury withdrawals or critical operations, requiring multi-sig or multi-stage approvals for large or unusual transactions. \\ \hline
+
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table highlights strategies that protocols can adopt to mitigate flashloan-related vulnerabilities, inspired by lessons learned from the Beanstalk exploit.}
+\label{tab:flashloan_mitigation}
+\end{table} 
+ 
+\subsection{Flashloan for pseudo arbitrage on incentives}
+
+The transaction 0x7567551456d5bafc6816e40b3dfa27de4040d140430c7d815e641d301755fb0b and 0xa55285d2d43562befbc4d2e76e722f4e34973a42cfe9f40b5222bf0f68bb8841 are the second and third greatest flashloan ever issued in Aave V2 ethereum. They are both issued by the same wallet and the mechanic is identical, therefore it is enough to document one. \\
+ The transaction 0x7567551456d5bafc6816e40b3dfa27de4040d140430c7d815e641d301755fb0b is much more simple than the protocol hack seen previously but it is complex to understand how the setup of a profitable trade has been achieved. The main challenge is find a meaning for the full inner transactions which looks at a first glance not profitable and therefore illogical. All the inner transactions are just eight and are rendered in the figure   \ref{fig:humphy1} 
+
+\begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/humpyDSProxy/innerTxHumphy.png}
+    \caption{Etherscan overview of DSProxy call within a flashloan.}
+    \label{fig:humphy1}
+\end{figure}
+
+The choice of displaying an etherscan view is  dictated by the mapping of wallet to known names, in this case Humpy, an extremely active multichain crypto whale making large usage of DEFI tools with advanced  development skills and DSProxy, a very important tool to execute bolckchain  code within a transaction.
+To understand what happened and how Humphy profited from the flashloan the inner transactions cannot be of any help: actually etherscan doesn't even render properly the amounts as can be noted by looking the flashloan repayment amount. For this paper scope has been necessary to proceed to a deep analysis of the logs emitted by the transactions and the smart contract called. They are available in the erigon node, and accessible through otterscan, but etherscan though less complete allows to map easier the names, therefore the figures will refer to etherscan for ease of usage.
+From the inner transactions and the logs a set of interacting protocols and tool are clearly identified: Aave, DSProxy, Humpy. Aave has been already described and Humpy is just the logical name of a wallet, DSProxy, instead, plays a very important role in the current transaction and requires some additional note. Calling a protocol, for example Aave, to execute complex operations requires to operate programmatically deploying one or more smart contracts on the blockchain; this expose directly the wallet of the contracts creator and can become complicate. Additionally, a common scenario, is calling different protocols in a unique transaction and DSProxy addresses  this natively. The protocol is well tested and used behind the scenes by very famous DEFI  protocols, in particular MakerDAO, the protocol behind the first DEFI stablecoin, DAI, which was created as a stablecon  pegged to USD and collateralised by eth and has evolved to a multicollateralised stablecoin with the operation to swap  collaterals handled transparently through DSProxy.
+
+\begin{table}[H]
+\centering
+\caption{DSProxy Functionality Summary}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Functionality} & \textbf{Description} \\ \hline
+\textbf{Proxy for User Interactions} & Acts as a smart contract proxy to allow users to interact with DeFi protocols on their behalf. \\ \hline
+\textbf{Execute Calls} & Executes arbitrary calls on behalf of the user, enabling complex interactions. \\ \hline
+\textbf{Access Control and Security} & Provides security by allowing users to delegate specific actions to the proxy, instead of exposing their funds directly. \\ \hline
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table summarizes the key functionalities of the DSProxy contract, used for interacting with DeFi protocols securely and efficiently.}
+\label{tab:dsproxy_functionality}
+\end{table}
+
+
+\begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/humpyDSProxy/innerlog.png}
+    \caption{Excerpt of an inner log}
+    \label{fig:humphy2}
+\end{figure}
+
+By observing the most meaningful emitted logs, in \ref{fig:humphy2} an example of what has been used for the analysis,  DSProxy is called twice redirecting the end result of its inner transactions to the humphy wallet and calling two smart contracts of the Aave protocol other than the flashloan ones:  Incentives Controller with rewardsAccrued  and AaveSaverTakerOV2.
+The  reason is that Aave V2 protocol was running an incentive program at that time, rewarding certain kind of usage with native tokens: Humpy likely used this opportunity to perform a set of operations in the protocol and get such incentives.
+ No investigations are done about possible  subtle interactions with pre-existing positions (e.g., adding liquidity briefly, leveraging yield mechanics which are  plausible but extremely hard to trace).
+ 
+The best comparison with traditional finance is a regulatory arbitrage in this case performed exploiting a reward mechanism.
+
+
+
+
+\subsection{Flashloan for obfuscating a transaction }
+
+The transaction 0x04c43669c930a82f9f6fb31757c722e2c9cb4305eaa16baafce378aa1c09e98e returned as the fifth biggest flashloan ever in Aave V2.0 correspondent to 38,100,000 DAI. 
+The transaction includes a flashloan and  a very big swap
+
+\begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/boshen/boshen1.png}
+    \caption{Overview of main transactions.}
+    \label{fig:boshen1}
+\end{figure}
+
+
+\begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/boshen/boshen2.png}
+    \caption{Overview of inner flashloan transactions.}
+    \label{fig:boshen2}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering % Properly centers the image
+    \includegraphics[width=\textwidth, keepaspectratio]{image/boshen/boshen3.png}
+    \caption{wallet owning the initial funds}
+    \label{fig:boshen3}
+\end{figure}
+
+
+The figure \ref{fig:boshen1} shows the main transactions, a 38,100,000 DAI flashloan and the swap, realised in uniswap of 38,233,180 USDC in 38,217,632 DAI
+The swap, although very big is only influencing minimally the price of DAI generating a little loss. In parallel a flashloan is issued as showed in figure  \ref{fig:boshen2}.
+The same figure shows the repayment of the flashloan including the premium.
+The analysis of the inner transactions shows a very irrational behaviour as the original fund could have simply been converted to DAI. The flashloan itself adds a premium paid in addition to the normal usage of uniswap, making the trade expensive in every component of it. In the previous cases was possible to see flashloans expensive in terms of premium paid but the end result of the transaction was a gain, basically from protocol hack or a meaningful action as a collateral swap and, in general, the common use, not necessarily related to interesting transactions, is using the flashloan to support another action. In this the flashloan is not different from a normal loan. The anomaly that has to be explained is why has the flashloan been called at all in this case. Observing figure  \ref{fig:boshen3}   the wallet owning the initial funds (the choice not to render the wallet id but labels helps in connecting the dots) is displayed as belonging to Bo Shen a famous crypto investor funding parter of the asian crypto fund Fenbushi capital and performs a transaction to Fake\_Phishing\_7142 of 38,233,180 USDC, which, first line of the figure performs one of the inner transactions of the flashloan from  \ref{fig:boshen2}, the swap of USDC to DAI is the inner transaction performed immediately  afterwards. Bo Shen notified  the stealing of the private key of one of his wallets containing BTC, Usdc and other cryptos. What happened is now totally consistent: Switching to DAI move from a usd stablecoin handled by a centralized authority, USDC, to one fully decentralised, performing the operation within a flashloan has the additional benefit of concealing the connection between the stolen wallet and the swap itself.
+
+\begin{table}[H]
+\centering
+\caption{Summary of Flashloan Caller Actions and Analysis}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|p{0.8\textwidth}|}
+\hline
+\textbf{Steps} & \textbf{Summary} \\ \hline
+\textbf{Identification of Anomalous Behavior} & 
+The flashloan caller utilized a flashloan unnecessarily, incurring additional premium costs without achieving any visible profit \\ \hline
+
+\textbf{Result of Additional Analysis} & 
+A wallet attributed to Bo Shen (a notable crypto investor and Fenbushi Capital partner) is connected through a transaction with another wallet involved  in the flashloan \\ \hline
+
+\textbf{Incident Report} & 
+Bo Shen publicly disclosed that one of his wallet's private keys had been stolen. \\ \hline
+
+\textbf{Rationale Behind the Flashloan and Swap} & 
+The flashloan caller converted USDC (a centralized stablecoin) to DAI (a decentralized stablecoin) to avoid the risk of USDC being frozen by its issuer, Circle. Using a flashloan to execute the swap helped obscure the link between the stolen wallet and the asset conversion, adding complexity to the transaction trail. \\ \hline
+
+\textbf{Final Assessment} & 
+The flashloan caller did not use the flashloan to generate profit but rather to mask the origins of the stolen funds and secure them in a decentralized, unfreezable form (DAI). \\ \hline
+\end{tabular}%
+}
+\captionsetup{font=footnotesize, justification=centering}
+\caption*{\footnotesize This table outlines the steps and analysis of the flashloan caller's actions, highlighting the rationale and implications behind the transactions.}
+\label{tab:flashloan_analysis}
+\end{table}
+
+
+
+\subsection{Flashloan call for MEV (front running trades)}
+
+
+
+
 
 \subsection{Flashloan call for arbitrage (find a real arbitrage)}
 
 \newpage
 
 
-\section{LAST CHAPTER ENDING WITH NEW PAGE}
-\subsection{aaa}
-\subsection{Abbb}
-Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt Inhalt  
 
-
-
-\newpage
 \section{Literaturverzeichnis}
 Gantenbein, Pascal, und Marco Gehrig, 2007, Moderne Unternehmensbewertung, \textit{Der
 Schweizer Treuhänder}, S. 602 – 612.
@@ -1084,7 +1363,7 @@ Schweizer Treuhänder}, S. 602 – 612.
 \newpage
 \section{Anhang}
 \subsection*{Eidesstattliche Erklärung}
-Hiermit erkläre ich, dass ich die vorliegende Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Mir ist bekannt, dass ich die volle Verantwortung für die Wissenschaftlichkeit des vorgelegten Textes selbst übernehme, auch wenn KI-Hilfsmittel eingesetzt und deklariert wurden. Alle Stellen, die wörtlich oder sinngemäss aus veröffentlichten oder nicht veröffentlichten Schriften entnommen wurden, sind als solche kenntlich gemacht. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden.\\\\\
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Mir ist bekannt, dass ich die volle Verantwortung für die Wissenschaftlichkeit des vorgelegten Textes selbst übernehme, auch wenn KI-Hilfsmittel eingesetzt und deklariert wurden. Alle Stellen, die wörtlich oder sinngemäss aus veröffentlichten oder nicht veröffentlichten Schriften entnommen wurden, sind als solche kenntlich gemacht. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden.\\
 \noindent Ort, den XX.XX.20YY
 \begin{flushright}
 $\overline{~~~~~~~~~\mbox{(Unterschrift der Verfasserin)}~~~~~~~~~}$
